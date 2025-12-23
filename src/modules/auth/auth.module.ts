@@ -32,10 +32,10 @@ import { RolesGuard } from './roles.guard';
     PrismaService,
     UsersService,
     ServerConfigService,
-    {
-      provide: APP_GUARD,
-      useClass: AuthGuard,
-    },
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: AuthGuard,
+    // },
     // {
     //   provide: APP_GUARD,
     //   useClass: RolesGuard,

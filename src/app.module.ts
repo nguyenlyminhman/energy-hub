@@ -11,6 +11,7 @@ import { PrismaModule } from './modules/prisma/prisma.module';
 import { MockModule } from './modules/mock/mock.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { MeterModule } from './modules/meter/meter.module';
 
 
 @Module({
@@ -43,6 +44,7 @@ import { AuthModule } from './modules/auth/auth.module';
     MockModule,
     UsersModule,
     AuthModule,
+    MeterModule,
   ],
   controllers: [AppController],
   providers: [
