@@ -2,51 +2,36 @@
 
 CREATE SCHEMA public AUTHORIZATION pg_database_owner;
 
--- DROP SEQUENCE meter_id_seq;
 
-CREATE SEQUENCE meter_id_seq
-	INCREMENT BY 1
-	MINVALUE 1
-	MAXVALUE 2147483647
-	START 1
-	CACHE 1
-	NO CYCLE;
--- DROP SEQUENCE meter_record_id_seq;
+-- public.users definition
 
-CREATE SEQUENCE meter_record_id_seq
-	INCREMENT BY 1
-	MINVALUE 1
-	MAXVALUE 2147483647
-	START 1
-	CACHE 1
-	NO CYCLE;
--- DROP SEQUENCE price_plan_id_seq;
+-- Drop table
 
-CREATE SEQUENCE price_plan_id_seq
-	INCREMENT BY 1
-	MINVALUE 1
-	MAXVALUE 2147483647
-	START 1
-	CACHE 1
-	NO CYCLE;
--- DROP SEQUENCE supplier_id_seq;
+-- DROP TABLE users;
 
-CREATE SEQUENCE supplier_id_seq
-	INCREMENT BY 1
-	MINVALUE 1
-	MAXVALUE 2147483647
-	START 1
-	CACHE 1
-	NO CYCLE;-- public.meter definition
+CREATE TABLE users (
+	username varchar NOT NULL,
+	"password" varchar NOT NULL,
+	fullname varchar NULL,
+	avatar varchar NULL,
+	id uuid NOT NULL,
+	created_at timestamp NULL,
+	created_by varchar NULL,
+	updated_at timestamp NULL,
+	updated_by varchar NULL,
+	CONSTRAINT users_pk PRIMARY KEY (id)
+);
+
+-- public.meter definition
 
 -- Drop table
 
 -- DROP TABLE meter;
 
 CREATE TABLE meter (
-	id serial4 NOT NULL,
-	meter_code varchar NULL,
-	price_plan_id int4 NULL,
+	id uuid NOT NULL,
+	meter_code varchar NOT NULL,
+	description varchar NULL,
 	created_at timestamp NULL,
 	created_by varchar NULL,
 	updated_at timestamp NULL,
@@ -54,40 +39,22 @@ CREATE TABLE meter (
 	CONSTRAINT meter_pk PRIMARY KEY (id)
 );
 
-
--- public.meter_record definition
+-- public.customer definition
 
 -- Drop table
 
--- DROP TABLE meter_record;
+-- DROP TABLE customer;
 
-CREATE TABLE meter_record (
-	id serial4 NOT NULL,
-	recorded_value int4 NULL,
-	meter_id int4 NULL,
+CREATE TABLE customer (
+	id uuid NOT NULL,
+	customer_code varchar NOT NULL,
+	description varchar NULL,
 	created_at timestamp NULL,
 	created_by varchar NULL,
 	updated_at timestamp NULL,
 	updated_by varchar NULL,
-	CONSTRAINT meter_record_pk PRIMARY KEY (id)
-);
-
-
--- public.price_plan definition
-
--- Drop table
-
--- DROP TABLE price_plan;
-
-CREATE TABLE price_plan (
-	id serial4 NOT NULL,
-	plan_name varchar NOT NULL,
-	rate int4 NULL,
-	created_at timestamp NULL,
-	created_by varchar NULL,
-	updated_at timestamp NULL,
-	updated_by varchar NULL,
-	CONSTRAINT price_plan_pk PRIMARY KEY (id)
+	CONSTRAINT customer_pk PRIMARY KEY (id),
+	CONSTRAINT customer_unique UNIQUE (customer_code)
 );
 
 
@@ -98,11 +65,86 @@ CREATE TABLE price_plan (
 -- DROP TABLE supplier;
 
 CREATE TABLE supplier (
-	id serial4 NOT NULL,
-	supplier_name varchar NOT NULL,
+	id uuid NOT NULL,
+	supplier_code varchar NULL,
+	description varchar NULL,
 	created_at timestamp NULL,
 	created_by varchar NULL,
 	updated_at timestamp NULL,
 	updated_by varchar NULL,
-	CONSTRAINT supplier_pk PRIMARY KEY (id)
+	CONSTRAINT supplier_pk PRIMARY KEY (id),
+	CONSTRAINT supplier_unique UNIQUE (supplier_code)
 );
+
+-- public.customer_meter definition
+
+-- Drop table
+
+-- DROP TABLE customer_meter;
+
+CREATE TABLE customer_meter (
+	id uuid NOT NULL,
+	customer_id uuid NULL,
+	meter_id uuid NULL,
+	start_at timestamp NULL,
+	end_at timestamp NULL,
+	created_at timestamp NULL,
+	created_by varchar NULL,
+	updated_at timestamp NULL,
+	updated_by varchar NULL,
+	CONSTRAINT customer_meter_pk PRIMARY KEY (id)
+);
+
+
+-- public.customer_meter foreign keys
+
+ALTER TABLE public.customer_meter ADD CONSTRAINT customer_meter_customer_fk FOREIGN KEY (customer_id) REFERENCES customer(id);
+ALTER TABLE public.customer_meter ADD CONSTRAINT customer_meter_meter_fk FOREIGN KEY (meter_id) REFERENCES meter(id);
+
+
+-- public.price_plan definition
+
+-- Drop table
+
+-- DROP TABLE price_plan;
+
+CREATE TABLE price_plan (
+	id uuid NOT NULL,
+	price_code varchar NULL,
+	description varchar NULL,
+	created_at timestamp NULL,
+	created_by varchar NULL,
+	updated_at timestamp NULL,
+	updated_by varchar NULL,
+	CONSTRAINT price_plan_pk PRIMARY KEY (id),
+	CONSTRAINT price_plan_unique UNIQUE (price_code)
+);
+
+
+-- public.meter_price_plan definition
+
+-- Drop table
+
+-- DROP TABLE meter_price_plan;
+
+CREATE TABLE meter_price_plan (
+	id uuid NOT NULL,
+	meter_id uuid NULL,
+	price_plan_id uuid NULL,
+	start_at timestamp NULL,
+	end_at timestamp NULL,
+	created_at timestamp NULL,
+	created_by varchar NULL,
+	updated_at timestamp NULL,
+	updated_by varchar NULL,
+	CONSTRAINT meter_price_plan_pk PRIMARY KEY (id)
+);
+
+
+-- public.meter_price_plan foreign keys
+
+ALTER TABLE public.meter_price_plan ADD CONSTRAINT meter_price_plan_meter_fk FOREIGN KEY (meter_id) REFERENCES meter(id);
+ALTER TABLE public.meter_price_plan ADD CONSTRAINT meter_price_plan_price_plan_fk FOREIGN KEY (price_plan_id) REFERENCES price_plan(id);
+
+
+
