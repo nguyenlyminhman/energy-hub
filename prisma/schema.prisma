@@ -9,48 +9,85 @@ datasource db {
 }
 
 model meter {
-  id            Int       @id(map: "meter_pk") @default(autoincrement())
-  meter_code    String?   @db.VarChar
-  price_plan_id Int?
+  id               String             @id(map: "meter_pk") @db.Uuid
+  meter_code       String             @db.VarChar
+  description      String?            @db.VarChar
+  created_at       DateTime?          @db.Timestamp(6)
+  created_by       String?            @db.VarChar
+  updated_at       DateTime?          @db.Timestamp(6)
+  updated_by       String?            @db.VarChar
+  customer_meter   customer_meter[]
+  meter_price_plan meter_price_plan[]
+}
+
+model price_plan {
+  id               String             @id(map: "price_plan_pk") @db.Uuid
+  price_code       String?            @unique(map: "price_plan_unique") @db.VarChar
+  description      String?            @db.VarChar
+  created_at       DateTime?          @db.Timestamp(6)
+  created_by       String?            @db.VarChar
+  updated_at       DateTime?          @db.Timestamp(6)
+  updated_by       String?            @db.VarChar
+  meter_price_plan meter_price_plan[]
+}
+
+model supplier {
+  id            String    @id(map: "supplier_pk") @db.Uuid
+  supplier_code String?   @unique(map: "supplier_unique") @db.VarChar
+  description   String?   @db.VarChar
   created_at    DateTime? @db.Timestamp(6)
   created_by    String?   @db.VarChar
   updated_at    DateTime? @db.Timestamp(6)
   updated_by    String?   @db.VarChar
 }
 
-model meter_record {
-  id             Int       @id(map: "meter_record_pk") @default(autoincrement())
-  recorded_value Int?
-  meter_id       Int?
-  created_at     DateTime? @db.Timestamp(6)
-  created_by     String?   @db.VarChar
-  updated_at     DateTime? @db.Timestamp(6)
-  updated_by     String?   @db.VarChar
+model customer {
+  id             String           @id(map: "customer_pk") @db.Uuid
+  customer_code  String           @unique(map: "customer_unique") @db.VarChar
+  description    String?          @db.VarChar
+  created_at     DateTime?        @db.Timestamp(6)
+  created_by     String?          @db.VarChar
+  updated_at     DateTime?        @db.Timestamp(6)
+  updated_by     String?          @db.VarChar
+  customer_meter customer_meter[]
 }
 
-model price_plan {
-  id         Int       @id(map: "price_plan_pk") @default(autoincrement())
-  plan_name  String    @db.VarChar
-  rate       Int?
+model customer_meter {
+  id          String    @id(map: "customer_meter_pk") @db.Uuid
+  customer_id String?   @db.Uuid
+  meter_id    String?   @db.Uuid
+  start_at    DateTime? @db.Timestamp(6)
+  end_at      DateTime? @db.Timestamp(6)
+  created_at  DateTime? @db.Timestamp(6)
+  created_by  String?   @db.VarChar
+  updated_at  DateTime? @db.Timestamp(6)
+  updated_by  String?   @db.VarChar
+  customer    customer? @relation(fields: [customer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "customer_meter_customer_fk")
+  meter       meter?    @relation(fields: [meter_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "customer_meter_meter_fk")
+}
+
+model meter_price_plan {
+  id            String      @id(map: "meter_price_plan_pk") @db.Uuid
+  meter_id      String?     @db.Uuid
+  price_plan_id String?     @db.Uuid
+  start_at      DateTime?   @db.Timestamp(6)
+  end_at        DateTime?   @db.Timestamp(6)
+  created_at    DateTime?   @db.Timestamp(6)
+  created_by    String?     @db.VarChar
+  updated_at    DateTime?   @db.Timestamp(6)
+  updated_by    String?     @db.VarChar
+  meter         meter?      @relation(fields: [meter_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "meter_price_plan_meter_fk")
+  price_plan    price_plan? @relation(fields: [price_plan_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "meter_price_plan_price_plan_fk")
+}
+
+model users {
+  username   String    @db.VarChar
+  password   String    @db.VarChar
+  fullname   String?   @db.VarChar
+  avatar     String?   @db.VarChar
+  id         String    @id(map: "users_pk") @db.Uuid
   created_at DateTime? @db.Timestamp(6)
   created_by String?   @db.VarChar
   updated_at DateTime? @db.Timestamp(6)
   updated_by String?   @db.VarChar
-}
-
-model supplier {
-  id            Int       @id(map: "supplier_pk") @default(autoincrement())
-  supplier_name String    @db.VarChar
-  created_at    DateTime? @db.Timestamp(6)
-  created_by    String?   @db.VarChar
-  updated_at    DateTime? @db.Timestamp(6)
-  updated_by    String?   @db.VarChar
-}
-
-model users {
-  username String  @db.VarChar
-  password String  @db.VarChar
-  fullname String? @db.VarChar
-  avatar   String? @db.VarChar
-  id       Int     @id(map: "users_pk") @default(autoincrement())
 }
