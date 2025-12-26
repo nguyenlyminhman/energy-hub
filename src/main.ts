@@ -9,6 +9,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerConfig } from './config/swagger';
 import * as morgan from 'morgan';
 import { LoggingInterceptor } from './interceptor/logging.interceptor';
+import { GlobalExceptionFilter } from './filter/global.exception.filter';
 
 
 async function bootstrap(): Promise<NestExpressApplication> {
@@ -25,6 +26,7 @@ async function bootstrap(): Promise<NestExpressApplication> {
   app.use(helmet());
 
   app.useGlobalInterceptors( new LoggingInterceptor() );
+  app.useGlobalFilters( new GlobalExceptionFilter() );
 
   app.setGlobalPrefix('/api');
   app.useGlobalPipes(

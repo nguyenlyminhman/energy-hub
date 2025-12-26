@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Query } from '@nestjs/common';
 import { RegisterReadingUseCase } from '../application/use-cases/register-reading.usecase';
 import { CreateReadingDto } from '../application/dtos/commands/create-reading.dto';
 import { CreateMeterDto } from '../application/dtos/commands/create-meter.dto';
@@ -9,17 +9,27 @@ import { CreateMeterResponse } from '../application/dtos/responses/create-meter.
 import { ResponseApi } from 'src/common/response.helper';
 import { ApiQuery } from '@nestjs/swagger';
 import { I18n, I18nContext } from 'nestjs-i18n';
+import { GetAllMeterUseCase } from '../application/use-cases/get-all-meter.usecase';
+import PaginationDto from 'src/common/dto/pagination.dto';
 
 @Controller({ path: EApiPath.METER, version: VERSION_1 })
 export class MeterController {
   constructor(
     private readonly registerReading: RegisterReadingUseCase,
-    private readonly createMeter: CreateMeterUseCase
+    private readonly createMeter: CreateMeterUseCase,
+    private readonly getAllMeter: GetAllMeterUseCase,
   ) { }
 
-  @Get('/code/:meterCode')
-  async view(@Body() dto: CreateMeterDto) {
-    return null;
+  @ApiQuery({
+    name: 'lang',
+    required: false,
+    description: 'Ngôn ngữ hiển thị (query param)',
+    example: 'vi',
+  })
+  @Get('/all')
+  async viewAll(@I18n() i18n: I18nContext, @Query() pagination: PaginationDto) {
+    const rs = await this.getAllMeter.execute({ ...pagination });
+    return ResponseApi.success(rs, i18n.t('root.get_success'), HttpStatus.OK);
   }
 
   @ApiQuery({

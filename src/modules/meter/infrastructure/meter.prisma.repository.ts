@@ -3,10 +3,32 @@ import { IMeterRepository } from "../domain/repositories/meter.repository";
 import { PrismaService } from "src/modules/prisma/prisma.service";
 import { Meter } from "../domain/entities/meter";
 import { MeterRecord } from "../domain/entities/meter-record";
+import PaginationDto from "src/common/dto/pagination.dto";
+import { AppUtil } from "src/utils/app.util";
+import MetadataDto from "src/common/dto/metadata.dto";
+import { ResponseDto } from "src/common/payload.data";
 
 @Injectable()
 export class MeterPrismaRepository implements IMeterRepository {
   constructor(private readonly prisma: PrismaService) { }
+
+
+  async findAll(pagination: PaginationDto): Promise<ResponseDto | null> {
+        const skipTake = AppUtil.getSkipTake(pagination);
+
+    const totalMeter = await this.prisma.meter.count();
+    console.log('totalMeter', totalMeter);
+    
+    const meta = new MetadataDto(pagination, totalMeter);
+
+    console.log('meta', {...meta});
+    
+
+    const rs: any[] = await this.prisma.meter.findMany({ ...skipTake });
+    
+    
+    return new ResponseDto(rs, meta);
+  }
 
 
   async findByCode(meterCode: string): Promise<Meter | null> {
