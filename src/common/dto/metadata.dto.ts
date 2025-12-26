@@ -8,6 +8,6 @@ export default class MetadataDto {
   constructor(pagination?: Partial<PaginationDto>, totalRecord?: number) {
     this.page = pagination?.page ?? this.page;
     this.pageSize = pagination?.pageSize ?? this.pageSize;
-    this.totalPage = Math.ceil(totalRecord ?? 0 / (pagination?.pageSize ?? this.pageSize));
+    this.totalPage = Math.ceil((totalRecord ?? 0) / this.pageSize);
   }
 }
