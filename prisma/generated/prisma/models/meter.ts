@@ -200,6 +200,7 @@ export type meterWhereInput = {
   updated_by?: Prisma.StringNullableFilter<"meter"> | string | null
   customer_meter?: Prisma.Customer_meterListRelationFilter
   meter_price_plan?: Prisma.Meter_price_planListRelationFilter
+  meter_record?: Prisma.Meter_recordListRelationFilter
 }
 
 export type meterOrderByWithRelationInput = {
@@ -212,6 +213,7 @@ export type meterOrderByWithRelationInput = {
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   customer_meter?: Prisma.customer_meterOrderByRelationAggregateInput
   meter_price_plan?: Prisma.meter_price_planOrderByRelationAggregateInput
+  meter_record?: Prisma.meter_recordOrderByRelationAggregateInput
 }
 
 export type meterWhereUniqueInput = Prisma.AtLeast<{
@@ -227,6 +229,7 @@ export type meterWhereUniqueInput = Prisma.AtLeast<{
   updated_by?: Prisma.StringNullableFilter<"meter"> | string | null
   customer_meter?: Prisma.Customer_meterListRelationFilter
   meter_price_plan?: Prisma.Meter_price_planListRelationFilter
+  meter_record?: Prisma.Meter_recordListRelationFilter
 }, "id">
 
 export type meterOrderByWithAggregationInput = {
@@ -265,6 +268,7 @@ export type meterCreateInput = {
   updated_by?: string | null
   customer_meter?: Prisma.customer_meterCreateNestedManyWithoutMeterInput
   meter_price_plan?: Prisma.meter_price_planCreateNestedManyWithoutMeterInput
+  meter_record?: Prisma.meter_recordCreateNestedManyWithoutMeterInput
 }
 
 export type meterUncheckedCreateInput = {
@@ -277,6 +281,7 @@ export type meterUncheckedCreateInput = {
   updated_by?: string | null
   customer_meter?: Prisma.customer_meterUncheckedCreateNestedManyWithoutMeterInput
   meter_price_plan?: Prisma.meter_price_planUncheckedCreateNestedManyWithoutMeterInput
+  meter_record?: Prisma.meter_recordUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type meterUpdateInput = {
@@ -289,6 +294,7 @@ export type meterUpdateInput = {
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_meter?: Prisma.customer_meterUpdateManyWithoutMeterNestedInput
   meter_price_plan?: Prisma.meter_price_planUpdateManyWithoutMeterNestedInput
+  meter_record?: Prisma.meter_recordUpdateManyWithoutMeterNestedInput
 }
 
 export type meterUncheckedUpdateInput = {
@@ -301,6 +307,7 @@ export type meterUncheckedUpdateInput = {
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_meter?: Prisma.customer_meterUncheckedUpdateManyWithoutMeterNestedInput
   meter_price_plan?: Prisma.meter_price_planUncheckedUpdateManyWithoutMeterNestedInput
+  meter_record?: Prisma.meter_recordUncheckedUpdateManyWithoutMeterNestedInput
 }
 
 export type meterCreateManyInput = {
@@ -412,6 +419,22 @@ export type meterUpdateOneWithoutMeter_price_planNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.meterUpdateToOneWithWhereWithoutMeter_price_planInput, Prisma.meterUpdateWithoutMeter_price_planInput>, Prisma.meterUncheckedUpdateWithoutMeter_price_planInput>
 }
 
+export type meterCreateNestedOneWithoutMeter_recordInput = {
+  create?: Prisma.XOR<Prisma.meterCreateWithoutMeter_recordInput, Prisma.meterUncheckedCreateWithoutMeter_recordInput>
+  connectOrCreate?: Prisma.meterCreateOrConnectWithoutMeter_recordInput
+  connect?: Prisma.meterWhereUniqueInput
+}
+
+export type meterUpdateOneWithoutMeter_recordNestedInput = {
+  create?: Prisma.XOR<Prisma.meterCreateWithoutMeter_recordInput, Prisma.meterUncheckedCreateWithoutMeter_recordInput>
+  connectOrCreate?: Prisma.meterCreateOrConnectWithoutMeter_recordInput
+  upsert?: Prisma.meterUpsertWithoutMeter_recordInput
+  disconnect?: Prisma.meterWhereInput | boolean
+  delete?: Prisma.meterWhereInput | boolean
+  connect?: Prisma.meterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.meterUpdateToOneWithWhereWithoutMeter_recordInput, Prisma.meterUpdateWithoutMeter_recordInput>, Prisma.meterUncheckedUpdateWithoutMeter_recordInput>
+}
+
 export type meterCreateWithoutCustomer_meterInput = {
   id: string
   meter_code: string
@@ -421,6 +444,7 @@ export type meterCreateWithoutCustomer_meterInput = {
   updated_at?: Date | string | null
   updated_by?: string | null
   meter_price_plan?: Prisma.meter_price_planCreateNestedManyWithoutMeterInput
+  meter_record?: Prisma.meter_recordCreateNestedManyWithoutMeterInput
 }
 
 export type meterUncheckedCreateWithoutCustomer_meterInput = {
@@ -432,6 +456,7 @@ export type meterUncheckedCreateWithoutCustomer_meterInput = {
   updated_at?: Date | string | null
   updated_by?: string | null
   meter_price_plan?: Prisma.meter_price_planUncheckedCreateNestedManyWithoutMeterInput
+  meter_record?: Prisma.meter_recordUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type meterCreateOrConnectWithoutCustomer_meterInput = {
@@ -459,6 +484,7 @@ export type meterUpdateWithoutCustomer_meterInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   meter_price_plan?: Prisma.meter_price_planUpdateManyWithoutMeterNestedInput
+  meter_record?: Prisma.meter_recordUpdateManyWithoutMeterNestedInput
 }
 
 export type meterUncheckedUpdateWithoutCustomer_meterInput = {
@@ -470,6 +496,7 @@ export type meterUncheckedUpdateWithoutCustomer_meterInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   meter_price_plan?: Prisma.meter_price_planUncheckedUpdateManyWithoutMeterNestedInput
+  meter_record?: Prisma.meter_recordUncheckedUpdateManyWithoutMeterNestedInput
 }
 
 export type meterCreateWithoutMeter_price_planInput = {
@@ -481,6 +508,7 @@ export type meterCreateWithoutMeter_price_planInput = {
   updated_at?: Date | string | null
   updated_by?: string | null
   customer_meter?: Prisma.customer_meterCreateNestedManyWithoutMeterInput
+  meter_record?: Prisma.meter_recordCreateNestedManyWithoutMeterInput
 }
 
 export type meterUncheckedCreateWithoutMeter_price_planInput = {
@@ -492,6 +520,7 @@ export type meterUncheckedCreateWithoutMeter_price_planInput = {
   updated_at?: Date | string | null
   updated_by?: string | null
   customer_meter?: Prisma.customer_meterUncheckedCreateNestedManyWithoutMeterInput
+  meter_record?: Prisma.meter_recordUncheckedCreateNestedManyWithoutMeterInput
 }
 
 export type meterCreateOrConnectWithoutMeter_price_planInput = {
@@ -519,6 +548,7 @@ export type meterUpdateWithoutMeter_price_planInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_meter?: Prisma.customer_meterUpdateManyWithoutMeterNestedInput
+  meter_record?: Prisma.meter_recordUpdateManyWithoutMeterNestedInput
 }
 
 export type meterUncheckedUpdateWithoutMeter_price_planInput = {
@@ -530,6 +560,71 @@ export type meterUncheckedUpdateWithoutMeter_price_planInput = {
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_meter?: Prisma.customer_meterUncheckedUpdateManyWithoutMeterNestedInput
+  meter_record?: Prisma.meter_recordUncheckedUpdateManyWithoutMeterNestedInput
+}
+
+export type meterCreateWithoutMeter_recordInput = {
+  id: string
+  meter_code: string
+  description?: string | null
+  created_at?: Date | string | null
+  created_by?: string | null
+  updated_at?: Date | string | null
+  updated_by?: string | null
+  customer_meter?: Prisma.customer_meterCreateNestedManyWithoutMeterInput
+  meter_price_plan?: Prisma.meter_price_planCreateNestedManyWithoutMeterInput
+}
+
+export type meterUncheckedCreateWithoutMeter_recordInput = {
+  id: string
+  meter_code: string
+  description?: string | null
+  created_at?: Date | string | null
+  created_by?: string | null
+  updated_at?: Date | string | null
+  updated_by?: string | null
+  customer_meter?: Prisma.customer_meterUncheckedCreateNestedManyWithoutMeterInput
+  meter_price_plan?: Prisma.meter_price_planUncheckedCreateNestedManyWithoutMeterInput
+}
+
+export type meterCreateOrConnectWithoutMeter_recordInput = {
+  where: Prisma.meterWhereUniqueInput
+  create: Prisma.XOR<Prisma.meterCreateWithoutMeter_recordInput, Prisma.meterUncheckedCreateWithoutMeter_recordInput>
+}
+
+export type meterUpsertWithoutMeter_recordInput = {
+  update: Prisma.XOR<Prisma.meterUpdateWithoutMeter_recordInput, Prisma.meterUncheckedUpdateWithoutMeter_recordInput>
+  create: Prisma.XOR<Prisma.meterCreateWithoutMeter_recordInput, Prisma.meterUncheckedCreateWithoutMeter_recordInput>
+  where?: Prisma.meterWhereInput
+}
+
+export type meterUpdateToOneWithWhereWithoutMeter_recordInput = {
+  where?: Prisma.meterWhereInput
+  data: Prisma.XOR<Prisma.meterUpdateWithoutMeter_recordInput, Prisma.meterUncheckedUpdateWithoutMeter_recordInput>
+}
+
+export type meterUpdateWithoutMeter_recordInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  meter_code?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer_meter?: Prisma.customer_meterUpdateManyWithoutMeterNestedInput
+  meter_price_plan?: Prisma.meter_price_planUpdateManyWithoutMeterNestedInput
+}
+
+export type meterUncheckedUpdateWithoutMeter_recordInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  meter_code?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer_meter?: Prisma.customer_meterUncheckedUpdateManyWithoutMeterNestedInput
+  meter_price_plan?: Prisma.meter_price_planUncheckedUpdateManyWithoutMeterNestedInput
 }
 
 
@@ -540,11 +635,13 @@ export type meterUncheckedUpdateWithoutMeter_price_planInput = {
 export type MeterCountOutputType = {
   customer_meter: number
   meter_price_plan: number
+  meter_record: number
 }
 
 export type MeterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   customer_meter?: boolean | MeterCountOutputTypeCountCustomer_meterArgs
   meter_price_plan?: boolean | MeterCountOutputTypeCountMeter_price_planArgs
+  meter_record?: boolean | MeterCountOutputTypeCountMeter_recordArgs
 }
 
 /**
@@ -571,6 +668,13 @@ export type MeterCountOutputTypeCountMeter_price_planArgs<ExtArgs extends runtim
   where?: Prisma.meter_price_planWhereInput
 }
 
+/**
+ * MeterCountOutputType without action
+ */
+export type MeterCountOutputTypeCountMeter_recordArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.meter_recordWhereInput
+}
+
 
 export type meterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -582,6 +686,7 @@ export type meterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updated_by?: boolean
   customer_meter?: boolean | Prisma.meter$customer_meterArgs<ExtArgs>
   meter_price_plan?: boolean | Prisma.meter$meter_price_planArgs<ExtArgs>
+  meter_record?: boolean | Prisma.meter$meter_recordArgs<ExtArgs>
   _count?: boolean | Prisma.MeterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["meter"]>
 
@@ -619,6 +724,7 @@ export type meterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type meterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   customer_meter?: boolean | Prisma.meter$customer_meterArgs<ExtArgs>
   meter_price_plan?: boolean | Prisma.meter$meter_price_planArgs<ExtArgs>
+  meter_record?: boolean | Prisma.meter$meter_recordArgs<ExtArgs>
   _count?: boolean | Prisma.MeterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type meterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -629,6 +735,7 @@ export type $meterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     customer_meter: Prisma.$customer_meterPayload<ExtArgs>[]
     meter_price_plan: Prisma.$meter_price_planPayload<ExtArgs>[]
+    meter_record: Prisma.$meter_recordPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1034,6 +1141,7 @@ export interface Prisma__meterClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   customer_meter<T extends Prisma.meter$customer_meterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.meter$customer_meterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$customer_meterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   meter_price_plan<T extends Prisma.meter$meter_price_planArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.meter$meter_price_planArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$meter_price_planPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  meter_record<T extends Prisma.meter$meter_recordArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.meter$meter_recordArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$meter_recordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1503,6 +1611,30 @@ export type meter$meter_price_planArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.Meter_price_planScalarFieldEnum | Prisma.Meter_price_planScalarFieldEnum[]
+}
+
+/**
+ * meter.meter_record
+ */
+export type meter$meter_recordArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the meter_record
+   */
+  select?: Prisma.meter_recordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the meter_record
+   */
+  omit?: Prisma.meter_recordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.meter_recordInclude<ExtArgs> | null
+  where?: Prisma.meter_recordWhereInput
+  orderBy?: Prisma.meter_recordOrderByWithRelationInput | Prisma.meter_recordOrderByWithRelationInput[]
+  cursor?: Prisma.meter_recordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Meter_recordScalarFieldEnum | Prisma.Meter_recordScalarFieldEnum[]
 }
 
 /**

@@ -55,7 +55,8 @@ export const ModelName = {
   customer: 'customer',
   customer_meter: 'customer_meter',
   meter_price_plan: 'meter_price_plan',
-  users: 'users'
+  users: 'users',
+  meter_record: 'meter_record'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -169,6 +170,20 @@ export const UsersScalarFieldEnum = {
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
+
+
+export const Meter_recordScalarFieldEnum = {
+  id: 'id',
+  meter_id: 'meter_id',
+  old_value: 'old_value',
+  new_value: 'new_value',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type Meter_recordScalarFieldEnum = (typeof Meter_recordScalarFieldEnum)[keyof typeof Meter_recordScalarFieldEnum]
 
 
 export const SortOrder = {

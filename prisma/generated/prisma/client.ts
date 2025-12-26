@@ -77,3 +77,8 @@ export type meter_price_plan = Prisma.meter_price_planModel
  * 
  */
 export type users = Prisma.usersModel
+/**
+ * Model meter_record
+ * 
+ */
+export type meter_record = Prisma.meter_recordModel

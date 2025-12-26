@@ -147,4 +147,25 @@ ALTER TABLE public.meter_price_plan ADD CONSTRAINT meter_price_plan_meter_fk FOR
 ALTER TABLE public.meter_price_plan ADD CONSTRAINT meter_price_plan_price_plan_fk FOREIGN KEY (price_plan_id) REFERENCES price_plan(id);
 
 
+-- public.meter_record definition
 
+-- Drop table
+
+-- DROP TABLE meter_record;
+
+CREATE TABLE meter_record (
+	id uuid NOT NULL,
+	meter_id uuid NULL,
+	old_value int4 NULL,
+	new_value int4 NULL,
+	created_at timestamp NULL,
+	created_by varchar NULL,
+	updated_at timestamp NULL,
+	updated_by varchar NULL,
+	CONSTRAINT meter_record_pk PRIMARY KEY (id)
+);
+
+
+-- public.meter_record foreign keys
+
+ALTER TABLE public.meter_record ADD CONSTRAINT meter_record_meter_fk FOREIGN KEY (meter_id) REFERENCES meter(id);

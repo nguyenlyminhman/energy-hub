@@ -3,7 +3,6 @@ import { PrismaService } from '../prisma/prisma.service';
 import { UserLoginDto } from './dto/login.dto';
 import { UsersService } from '../users/users.service';
 import { AppUtil } from 'src/utils/app.util';
-import { users } from 'generated/prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import { ResponseDto } from 'src/common/payload.data';
 
