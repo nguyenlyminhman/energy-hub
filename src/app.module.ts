@@ -11,7 +11,10 @@ import { PrismaModule } from './modules/prisma/prisma.module';
 import { MockModule } from './modules/mock/mock.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { MeterModule } from './modules/meter/meter.module';
+import { PricingModule } from './modules/pricing/pricing.module';
+import { SupplierModule } from './modules/supplier/supplier.module';
+import { CustomerModule } from './modules/customer/customer.module';
+import { MeteringModule } from './modules/meter/meter.module';
 
 
 @Module({
@@ -44,7 +47,10 @@ import { MeterModule } from './modules/meter/meter.module';
     MockModule,
     UsersModule,
     AuthModule,
-    MeterModule,
+    MeteringModule,
+    PricingModule,
+    SupplierModule,
+    CustomerModule,
   ],
   controllers: [AppController],
   providers: [

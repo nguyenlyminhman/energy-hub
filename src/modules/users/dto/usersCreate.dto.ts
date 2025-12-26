@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString } from "class-validator";
-import BaseDto from "src/dto/base.dto";
+import BaseDto from "src/common/dto/base.dto";
 
 export class UsersCreateDto {
   

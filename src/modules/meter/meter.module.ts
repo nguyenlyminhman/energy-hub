@@ -4,6 +4,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { MeterPrismaRepository } from './infrastructure/meter.prisma.repository';
 import { MeterDomainService } from './domain/services/meter-domain.service';
 import { RegisterReadingUseCase } from './application/use-cases/register-reading.usecase';
+import { CreateMeterUseCase } from './application/use-cases/create-meter.usecase';
 
 @Module({
   controllers: [MeterController],
@@ -12,15 +13,21 @@ import { RegisterReadingUseCase } from './application/use-cases/register-reading
     { provide: 'IMeterRepository', useClass: MeterPrismaRepository },
     {
       provide: MeterDomainService,
-      useFactory: (repo) => new MeterDomainService(repo),
-      inject: ['IMeterRepository'],
+      useClass: MeterDomainService,
     },
     {
       provide: RegisterReadingUseCase,
-      useFactory: (domainSvc) => new RegisterReadingUseCase(domainSvc),
-      inject: [MeterDomainService],
+      useFactory: (repo, domainSvc) =>
+        new RegisterReadingUseCase(repo, domainSvc),
+      inject: ['IMeterRepository', MeterDomainService],
     },
+    {
+      provide: CreateMeterUseCase,
+      useFactory: (repo) =>
+        new CreateMeterUseCase(repo),
+      inject: ['IMeterRepository', MeterDomainService],
+    },
+    
   ],
-  exports: [],
 })
-export class MeterModule {}
+export class MeteringModule {}

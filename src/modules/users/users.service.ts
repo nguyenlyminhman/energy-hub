@@ -1,12 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { users } from 'generated/prisma/client';
 import { UsersCreateDto } from './dto/usersCreate.dto';
 import { AppUtil } from 'src/utils/app.util';
-import { log } from 'console';
 import { ResponseDto } from 'src/common/payload.data';
-import PaginationDto from 'src/dto/pagination.dto';
-import MetadataDto from 'src/dto/metadata.dto';
+import PaginationDto from 'src/common/dto/pagination.dto';
+import MetadataDto from 'src/common/dto/metadata.dto';
+import { users } from 'prisma/generated/prisma/client';
 
 @Injectable()
 export class UsersService {
@@ -16,7 +15,7 @@ export class UsersService {
 	async create(userData: UsersCreateDto): Promise<ResponseDto> {
 		try {
 			userData.password = AppUtil.generatePassword(userData.password);
-			const createdUser = await this.prisma.users.create({ data: { ...userData } });
+			const createdUser = await this.prisma.users.create({ data: { ...userData, id: crypto.randomUUID(), } });
 
 			return new ResponseDto(createdUser, new MetadataDto());
 		} catch (error) {

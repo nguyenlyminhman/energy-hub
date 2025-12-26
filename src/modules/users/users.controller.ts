@@ -4,7 +4,7 @@ import { UsersCreateDto } from './dto/usersCreate.dto';
 import { UsersService } from './users.service';
 import { ResponseApi } from 'src/common/response.helper';
 import { I18n, I18nContext } from 'nestjs-i18n';
-import PaginationDto from 'src/dto/pagination.dto';
+import PaginationDto from 'src/common/dto/pagination.dto';
 import { ResponseDto } from 'src/common/payload.data';
 import { EApiPath, VERSION_1 } from 'src/objects/enum/EApiPath.enum';
 import { Public } from 'src/decorator/public.decorator';

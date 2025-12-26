@@ -18,6 +18,7 @@ model meter {
   updated_by       String?            @db.VarChar
   customer_meter   customer_meter[]
   meter_price_plan meter_price_plan[]
+  meter_record     meter_record[]
 }
 
 model price_plan {
@@ -90,4 +91,16 @@ model users {
   created_by String?   @db.VarChar
   updated_at DateTime? @db.Timestamp(6)
   updated_by String?   @db.VarChar
+}
+
+model meter_record {
+  id         String    @id(map: "meter_record_pk") @db.Uuid
+  meter_id   String?   @db.Uuid
+  old_value  Int?
+  new_value  Int?
+  created_at DateTime? @db.Timestamp(6)
+  created_by String?   @db.VarChar
+  updated_at DateTime? @db.Timestamp(6)
+  updated_by String?   @db.VarChar
+  meter      meter?    @relation(fields: [meter_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "meter_record_meter_fk")
 }

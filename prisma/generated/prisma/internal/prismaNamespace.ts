@@ -396,7 +396,8 @@ export const ModelName = {
   customer: 'customer',
   customer_meter: 'customer_meter',
   meter_price_plan: 'meter_price_plan',
-  users: 'users'
+  users: 'users',
+  meter_record: 'meter_record'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -412,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "meter" | "price_plan" | "supplier" | "customer" | "customer_meter" | "meter_price_plan" | "users"
+    modelProps: "meter" | "price_plan" | "supplier" | "customer" | "customer_meter" | "meter_price_plan" | "users" | "meter_record"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -934,6 +935,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    meter_record: {
+      payload: Prisma.$meter_recordPayload<ExtArgs>
+      fields: Prisma.meter_recordFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.meter_recordFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$meter_recordPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.meter_recordFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$meter_recordPayload>
+        }
+        findFirst: {
+          args: Prisma.meter_recordFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$meter_recordPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.meter_recordFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$meter_recordPayload>
+        }
+        findMany: {
+          args: Prisma.meter_recordFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$meter_recordPayload>[]
+        }
+        create: {
+          args: Prisma.meter_recordCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$meter_recordPayload>
+        }
+        createMany: {
+          args: Prisma.meter_recordCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.meter_recordCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$meter_recordPayload>[]
+        }
+        delete: {
+          args: Prisma.meter_recordDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$meter_recordPayload>
+        }
+        update: {
+          args: Prisma.meter_recordUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$meter_recordPayload>
+        }
+        deleteMany: {
+          args: Prisma.meter_recordDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.meter_recordUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.meter_recordUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$meter_recordPayload>[]
+        }
+        upsert: {
+          args: Prisma.meter_recordUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$meter_recordPayload>
+        }
+        aggregate: {
+          args: Prisma.Meter_recordAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMeter_record>
+        }
+        groupBy: {
+          args: Prisma.meter_recordGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Meter_recordGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.meter_recordCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Meter_recordCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1070,6 +1145,20 @@ export const UsersScalarFieldEnum = {
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
 
 
+export const Meter_recordScalarFieldEnum = {
+  id: 'id',
+  meter_id: 'meter_id',
+  old_value: 'old_value',
+  new_value: 'new_value',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type Meter_recordScalarFieldEnum = (typeof Meter_recordScalarFieldEnum)[keyof typeof Meter_recordScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1139,6 +1228,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'Float[]'
+ */
+export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 /**
@@ -1235,6 +1338,7 @@ export type GlobalOmitConfig = {
   customer_meter?: Prisma.customer_meterOmit
   meter_price_plan?: Prisma.meter_price_planOmit
   users?: Prisma.usersOmit
+  meter_record?: Prisma.meter_recordOmit
 }
 
 /* Types for Logging */
