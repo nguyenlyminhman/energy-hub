@@ -1,44 +1,51 @@
-import { ConflictException, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { IMeterRepository } from "../domain/repositories/meter.repository";
 import { PrismaService } from "src/modules/prisma/prisma.service";
 import { Meter } from "../domain/entities/meter";
 import { MeterRecord } from "../domain/entities/meter-record";
 import PaginationDto from "src/common/dto/pagination.dto";
 import { AppUtil } from "src/utils/app.util";
-import MetadataDto from "src/common/dto/metadata.dto";
-import { ResponseDto } from "src/common/payload.data";
 
 @Injectable()
 export class MeterPrismaRepository implements IMeterRepository {
   constructor(private readonly prisma: PrismaService) { }
 
-
-  async findAll(pagination: PaginationDto): Promise<ResponseDto | null> {
-        const skipTake = AppUtil.getSkipTake(pagination);
-
-    const totalMeter = await this.prisma.meter.count();
-    console.log('totalMeter', totalMeter);
-    
-    const meta = new MetadataDto(pagination, totalMeter);
-
-    console.log('meta', {...meta});
-    
-
-    const rs: any[] = await this.prisma.meter.findMany({ ...skipTake });
-    
-    
-    return new ResponseDto(rs, meta);
+  async saveMeterRecord(meterRecord: MeterRecord): Promise<void> {
+    await this.prisma.meter_record.create({
+      data: {
+        id: meterRecord.id,
+        meter_id: meterRecord.meterId,
+        old_value: meterRecord.oldValue,
+        new_value: meterRecord.newValue,
+        created_at: meterRecord.createdAt,
+        created_by: meterRecord.createdBy,
+      },
+    });
   }
 
+  async getLatestRecord(meterId: string): Promise<MeterRecord | null> {
+    const rs: any = await this.prisma.meter_record.findFirst({
+      where: { meter_id: meterId },
+      orderBy: { created_at: 'desc' },
+    });
+
+    return rs ? MeterRecord.fromPersistence(rs) : null;
+  }
+
+  async findAll(pagination: PaginationDto): Promise<Object | null> {
+    const skipTake = AppUtil.getSkipTake(pagination);
+
+    const totalMeter = await this.prisma.meter.count();
+    const rs: any[] = await this.prisma.meter.findMany({ ...skipTake });
+
+    return { data: rs, total: totalMeter }
+  }
 
   async findByCode(meterCode: string): Promise<Meter | null> {
     const rs: any = await this.prisma.meter.findFirst({ where: { meter_code: meterCode } })
     return rs;
   }
 
-  /* =========================
-     LOAD AGGREGATE ROOT
-     ========================= */
   async findById(id: string): Promise<Meter | null> {
     const r = await this.prisma.meter.findUnique({
       where: { id },
@@ -54,9 +61,6 @@ export class MeterPrismaRepository implements IMeterRepository {
     );
   }
 
-  /* =========================
-     LOAD CHILD ENTITIES
-     ========================= */
   async loadRecords(meterId: string): Promise<MeterRecord[]> {
     const rows = await this.prisma.meter_record.findMany({
       where: { meter_id: meterId },
@@ -67,14 +71,14 @@ export class MeterPrismaRepository implements IMeterRepository {
       (r: any) =>
         MeterRecord.fromPersistence({
           id: r.id,
-          oldValue: r.old_value,
-          newValue: r.new_value,
-          createdAt: r.created_at,
-          createdBy: r.created_by,
+          meter_id: r.meter_id,
+          old_value: r.old_value,
+          new_value: r.new_value,
+          created_at: r.created_at,
+          created_by: r.created_by,
         }),
     );
   }
-
 
   async save(meter: Meter): Promise<void> {
     await this.prisma.meter.create({

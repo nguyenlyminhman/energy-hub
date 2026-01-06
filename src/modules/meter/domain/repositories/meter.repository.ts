@@ -9,9 +9,13 @@ export interface IMeterRepository {
   
   findByCode(meterCode: string): Promise<Meter | null>;
   
-  findAll(pagination: PaginationDto): Promise<ResponseDto | null>;
+  findAll(pagination: PaginationDto): Promise<Object | null>;
   
   loadRecords(meterId: string): Promise<MeterRecord[]>;
+
+  getLatestRecord(meterId: string): Promise<MeterRecord | null>;
   
   save(meter: Meter): Promise<void>;
+
+  saveMeterRecord(meterRecord: MeterRecord): Promise<void>;
 }

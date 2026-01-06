@@ -29,6 +29,7 @@ export class MeterController {
   @Get('/all')
   async viewAll(@I18n() i18n: I18nContext, @Query() pagination: PaginationDto) {
     const rs = await this.getAllMeter.execute({ ...pagination });
+    
     return ResponseApi.success(rs, i18n.t('root.get_success'), HttpStatus.OK);
   }
 
@@ -49,15 +50,21 @@ export class MeterController {
     return ResponseApi.success(record, i18n.t('root.create_success'), HttpStatus.ACCEPTED);
   }
 
-  @Post('/readings')
-  async reading(@Body() dto: CreateReadingDto) {
+   @ApiQuery({
+    name: 'lang',
+    required: false,
+    description: 'Ngôn ngữ hiển thị (query param)',
+    example: 'vi',
+  })
+  @Post('/reading')
+  async reading(@I18n() i18n: I18nContext, @User() user: any, @Body() dto: CreateReadingDto) {
     const record = await this.registerReading.execute({
       meterId: dto.meterId,
       oldValue: dto.oldValue,
       newValue: dto.newValue,
-      createdBy: 'system',
+      createdBy: user?.id ?? 'SYSTEM',
     });
 
-    return { value: record.newValue, createdAt: record.createdAt };
+    return ResponseApi.success(record, i18n.t('root.create_success'), HttpStatus.ACCEPTED);
   }
 }

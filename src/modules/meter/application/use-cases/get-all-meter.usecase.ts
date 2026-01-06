@@ -1,7 +1,8 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { IMeterRepository } from "../../domain/repositories/meter.repository";
-import { AllMeterResponse } from "../dtos/responses/all-meter.response";
 import PaginationDto from "src/common/dto/pagination.dto";
+import { ResponseDto } from "src/common/payload.data";
+import MetadataDto from "src/common/dto/metadata.dto";
 
 @Injectable()
 export class GetAllMeterUseCase {
@@ -11,8 +12,10 @@ export class GetAllMeterUseCase {
   ) { }
 
   async execute(pagination: PaginationDto) {
-    const meters: any = await this.meterRepo.findAll({...pagination});  
+    const rs: any = await this.meterRepo.findAll({...pagination});
+    
+    const meta = new MetadataDto(pagination, rs?.total);
 
-    return meters;
+    return new ResponseDto(rs.data, meta);
   }
 }

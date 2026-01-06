@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsString } from 'class-validator';
+import { IsInt, IsString, IsUUID } from 'class-validator';
 
 export class CreateReadingDto {
   
   @ApiProperty()
-  @IsString()
+  @IsUUID()
   meterId: string;
 
   @ApiProperty()

@@ -24,21 +24,21 @@ export class Meter {
 
   /* ========== Aggregate Behavior ========== */
 
-  registerReading(reading: ReadingValue, createdBy: string): MeterRecord {
-    const last = this.getLastRecord();
+   registerReading(
+    lastRecord: MeterRecord | null,
+    newValue: number,
+    oldValue: number,
+    createdBy: string,
+  ): MeterRecord {
+    const _oldValue = lastRecord?.oldValue ?? oldValue;
+    const reading = new ReadingValue(_oldValue, newValue);
 
-    if (last && reading.newValue < last.newValue) {
-      throw new Error('New reading is less than last reading');
-    }
-
-    const record = MeterRecord.create({
+    return MeterRecord.create({
+      meterId: this.id,
       oldValue: reading.oldValue,
       newValue: reading.newValue,
       createdBy,
     });
-
-    this.records.push(record);
-    return record;
   }
 
   updateRecord(recordId: string, newValue: number): MeterRecord {
