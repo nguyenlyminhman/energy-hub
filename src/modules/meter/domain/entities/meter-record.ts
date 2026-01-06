@@ -1,6 +1,7 @@
 export class MeterRecord {
   private constructor(
     public readonly id: string,
+    public meterId: string,
     public oldValue: number,
     public newValue: number,
     public readonly createdAt: Date,
@@ -9,6 +10,7 @@ export class MeterRecord {
 
   /* Dùng khi tạo mới trong domain */
   static create(params: {
+    meterId: string;
     oldValue: number;
     newValue: number;
     createdBy: string;
@@ -22,6 +24,7 @@ export class MeterRecord {
 
     return new MeterRecord(
       crypto.randomUUID(),
+      params.meterId,
       params.oldValue,
       params.newValue,
       new Date(),
@@ -30,19 +33,21 @@ export class MeterRecord {
   }
 
   /* 🔥 DÙNG RIÊNG CHO REPOSITORY */
-  static fromPersistence(params: {
+  static fromPersistence(params: { 
     id: string;
-    oldValue: number;
-    newValue: number;
-    createdAt: Date;
-    createdBy: string;
+    meter_id: string;
+    old_value: number;
+    new_value: number;
+    created_at: Date;
+    created_by: string;
   }): MeterRecord {
     return new MeterRecord(
       params.id,
-      params.oldValue,
-      params.newValue,
-      params.createdAt,
-      params.createdBy,
+      params.meter_id,
+      params.old_value,
+      params.new_value,
+      params.created_at,
+      params.created_by,
     );
   }
 
@@ -52,4 +57,5 @@ export class MeterRecord {
     }
     this.newValue = newValue;
   }
+
 }

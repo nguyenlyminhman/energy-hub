@@ -18,7 +18,7 @@ import { GetAllMeterUseCase } from './application/use-cases/get-all-meter.usecas
     },
     {
       provide: RegisterReadingUseCase,
-      useFactory: (repo, domainSvc) => new RegisterReadingUseCase(repo, domainSvc),
+      useFactory: (repo) => new RegisterReadingUseCase(repo),
       inject: ['IMeterRepository', MeterDomainService],
     },
     {
