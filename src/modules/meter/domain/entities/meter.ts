@@ -14,6 +14,8 @@ export class Meter {
   static create(code: string, description: string): Meter {
     const normalizedCode = code.trim().toUpperCase();
 
+    
+
     return new Meter(
       crypto.randomUUID(),
       normalizedCode,
