@@ -16,55 +16,45 @@ model meter {
   created_by       String?            @db.VarChar
   updated_at       DateTime?          @db.Timestamp(6)
   updated_by       String?            @db.VarChar
-  customer_meter   customer_meter[]
+  customer_id      String?            @db.Uuid
+  customer         customer?          @relation(fields: [customer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "meter_customer_fk")
   meter_price_plan meter_price_plan[]
   meter_record     meter_record[]
 }
 
 model price_plan {
   id               String             @id(map: "price_plan_pk") @db.Uuid
-  price_code       String?            @unique(map: "price_plan_unique") @db.VarChar
+  price_plan_code  String?            @unique(map: "price_plan_unique") @db.VarChar
   description      String?            @db.VarChar
   created_at       DateTime?          @db.Timestamp(6)
   created_by       String?            @db.VarChar
   updated_at       DateTime?          @db.Timestamp(6)
   updated_by       String?            @db.VarChar
+  supplier_id      String?            @db.Uuid
   meter_price_plan meter_price_plan[]
+  supplier         supplier?          @relation(fields: [supplier_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "price_plan_supplier_fk")
 }
 
 model supplier {
-  id            String    @id(map: "supplier_pk") @db.Uuid
-  supplier_code String?   @unique(map: "supplier_unique") @db.VarChar
+  id            String       @id(map: "supplier_pk") @db.Uuid
+  supplier_code String?      @unique(map: "supplier_unique") @db.VarChar
+  description   String?      @db.VarChar
+  created_at    DateTime?    @db.Timestamp(6)
+  created_by    String?      @db.VarChar
+  updated_at    DateTime?    @db.Timestamp(6)
+  updated_by    String?      @db.VarChar
+  price_plan    price_plan[]
+}
+
+model customer {
+  id            String    @id(map: "customer_pk") @db.Uuid
+  customer_code String    @unique(map: "customer_unique") @db.VarChar
   description   String?   @db.VarChar
   created_at    DateTime? @db.Timestamp(6)
   created_by    String?   @db.VarChar
   updated_at    DateTime? @db.Timestamp(6)
   updated_by    String?   @db.VarChar
-}
-
-model customer {
-  id             String           @id(map: "customer_pk") @db.Uuid
-  customer_code  String           @unique(map: "customer_unique") @db.VarChar
-  description    String?          @db.VarChar
-  created_at     DateTime?        @db.Timestamp(6)
-  created_by     String?          @db.VarChar
-  updated_at     DateTime?        @db.Timestamp(6)
-  updated_by     String?          @db.VarChar
-  customer_meter customer_meter[]
-}
-
-model customer_meter {
-  id          String    @id(map: "customer_meter_pk") @db.Uuid
-  customer_id String?   @db.Uuid
-  meter_id    String?   @db.Uuid
-  start_at    DateTime? @db.Timestamp(6)
-  end_at      DateTime? @db.Timestamp(6)
-  created_at  DateTime? @db.Timestamp(6)
-  created_by  String?   @db.VarChar
-  updated_at  DateTime? @db.Timestamp(6)
-  updated_by  String?   @db.VarChar
-  customer    customer? @relation(fields: [customer_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "customer_meter_customer_fk")
-  meter       meter?    @relation(fields: [meter_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "customer_meter_meter_fk")
+  meter         meter[]
 }
 
 model meter_price_plan {
