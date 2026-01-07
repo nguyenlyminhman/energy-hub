@@ -6,5 +6,6 @@ export enum EApiPath {
     AUTH = '/auth',
     USER = '/user',
     POST = '/post',
-    CATEGORY = '/category',
+    CUSTOMER = '/customer',
+
 }

@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpStatus, Post, Query } from '@nestjs/common';
-import { RegisterReadingUseCase } from '../application/use-cases/register-reading.usecase';
+import { CreateMeterRecordUseCase } from '../application/use-cases/create-meter-record.usecase';
 import { CreateReadingDto } from '../application/dtos/commands/create-reading.dto';
 import { CreateMeterDto } from '../application/dtos/commands/create-meter.dto';
 import { CreateMeterUseCase } from '../application/use-cases/create-meter.usecase';
@@ -15,9 +15,10 @@ import PaginationDto from 'src/common/dto/pagination.dto';
 @Controller({ path: EApiPath.METER, version: VERSION_1 })
 export class MeterController {
   constructor(
-    private readonly registerReading: RegisterReadingUseCase,
+    private readonly createMeterRecord: CreateMeterRecordUseCase,
     private readonly createMeter: CreateMeterUseCase,
     private readonly getAllMeter: GetAllMeterUseCase,
+    // implement
   ) { }
 
   @ApiQuery({
@@ -29,7 +30,7 @@ export class MeterController {
   @Get('/all')
   async viewAll(@I18n() i18n: I18nContext, @Query() pagination: PaginationDto) {
     const rs = await this.getAllMeter.execute({ ...pagination });
-    
+
     return ResponseApi.success(rs, i18n.t('root.get_success'), HttpStatus.OK);
   }
 
@@ -50,15 +51,16 @@ export class MeterController {
     return ResponseApi.success(record, i18n.t('root.create_success'), HttpStatus.ACCEPTED);
   }
 
-   @ApiQuery({
+  @ApiQuery({
     name: 'lang',
     required: false,
     description: 'Ngôn ngữ hiển thị (query param)',
     example: 'vi',
   })
+
   @Post('/reading')
   async reading(@I18n() i18n: I18nContext, @User() user: any, @Body() dto: CreateReadingDto) {
-    const record = await this.registerReading.execute({
+    const record = await this.createMeterRecord.execute({
       meterId: dto.meterId,
       oldValue: dto.oldValue,
       newValue: dto.newValue,
