@@ -4,7 +4,7 @@ import { MeterRecordResponse } from "../dtos/responses/meter-record.response";
 import { UUID } from "crypto";
 
 @Injectable()
-export class RegisterReadingUseCase {
+export class CreateMeterRecordUseCase {
   constructor(
     private readonly meterRepo: IMeterRepository,
     // private readonly domainSvc: MeterDomainService,
