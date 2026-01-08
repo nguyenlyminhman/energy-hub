@@ -198,6 +198,7 @@ export type supplierWhereInput = {
   created_by?: Prisma.StringNullableFilter<"supplier"> | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"supplier"> | Date | string | null
   updated_by?: Prisma.StringNullableFilter<"supplier"> | string | null
+  price_plan?: Prisma.Price_planListRelationFilter
 }
 
 export type supplierOrderByWithRelationInput = {
@@ -208,6 +209,7 @@ export type supplierOrderByWithRelationInput = {
   created_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  price_plan?: Prisma.price_planOrderByRelationAggregateInput
 }
 
 export type supplierWhereUniqueInput = Prisma.AtLeast<{
@@ -221,6 +223,7 @@ export type supplierWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.StringNullableFilter<"supplier"> | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"supplier"> | Date | string | null
   updated_by?: Prisma.StringNullableFilter<"supplier"> | string | null
+  price_plan?: Prisma.Price_planListRelationFilter
 }, "id" | "supplier_code">
 
 export type supplierOrderByWithAggregationInput = {
@@ -257,6 +260,7 @@ export type supplierCreateInput = {
   created_by?: string | null
   updated_at?: Date | string | null
   updated_by?: string | null
+  price_plan?: Prisma.price_planCreateNestedManyWithoutSupplierInput
 }
 
 export type supplierUncheckedCreateInput = {
@@ -267,6 +271,7 @@ export type supplierUncheckedCreateInput = {
   created_by?: string | null
   updated_at?: Date | string | null
   updated_by?: string | null
+  price_plan?: Prisma.price_planUncheckedCreateNestedManyWithoutSupplierInput
 }
 
 export type supplierUpdateInput = {
@@ -277,6 +282,7 @@ export type supplierUpdateInput = {
   created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price_plan?: Prisma.price_planUpdateManyWithoutSupplierNestedInput
 }
 
 export type supplierUncheckedUpdateInput = {
@@ -287,6 +293,7 @@ export type supplierUncheckedUpdateInput = {
   created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price_plan?: Prisma.price_planUncheckedUpdateManyWithoutSupplierNestedInput
 }
 
 export type supplierCreateManyInput = {
@@ -319,6 +326,11 @@ export type supplierUncheckedUpdateManyInput = {
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
+export type SupplierNullableScalarRelationFilter = {
+  is?: Prisma.supplierWhereInput | null
+  isNot?: Prisma.supplierWhereInput | null
+}
+
 export type supplierCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   supplier_code?: Prisma.SortOrder
@@ -349,6 +361,107 @@ export type supplierMinOrderByAggregateInput = {
   updated_by?: Prisma.SortOrder
 }
 
+export type supplierCreateNestedOneWithoutPrice_planInput = {
+  create?: Prisma.XOR<Prisma.supplierCreateWithoutPrice_planInput, Prisma.supplierUncheckedCreateWithoutPrice_planInput>
+  connectOrCreate?: Prisma.supplierCreateOrConnectWithoutPrice_planInput
+  connect?: Prisma.supplierWhereUniqueInput
+}
+
+export type supplierUpdateOneWithoutPrice_planNestedInput = {
+  create?: Prisma.XOR<Prisma.supplierCreateWithoutPrice_planInput, Prisma.supplierUncheckedCreateWithoutPrice_planInput>
+  connectOrCreate?: Prisma.supplierCreateOrConnectWithoutPrice_planInput
+  upsert?: Prisma.supplierUpsertWithoutPrice_planInput
+  disconnect?: Prisma.supplierWhereInput | boolean
+  delete?: Prisma.supplierWhereInput | boolean
+  connect?: Prisma.supplierWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.supplierUpdateToOneWithWhereWithoutPrice_planInput, Prisma.supplierUpdateWithoutPrice_planInput>, Prisma.supplierUncheckedUpdateWithoutPrice_planInput>
+}
+
+export type supplierCreateWithoutPrice_planInput = {
+  id: string
+  supplier_code?: string | null
+  description?: string | null
+  created_at?: Date | string | null
+  created_by?: string | null
+  updated_at?: Date | string | null
+  updated_by?: string | null
+}
+
+export type supplierUncheckedCreateWithoutPrice_planInput = {
+  id: string
+  supplier_code?: string | null
+  description?: string | null
+  created_at?: Date | string | null
+  created_by?: string | null
+  updated_at?: Date | string | null
+  updated_by?: string | null
+}
+
+export type supplierCreateOrConnectWithoutPrice_planInput = {
+  where: Prisma.supplierWhereUniqueInput
+  create: Prisma.XOR<Prisma.supplierCreateWithoutPrice_planInput, Prisma.supplierUncheckedCreateWithoutPrice_planInput>
+}
+
+export type supplierUpsertWithoutPrice_planInput = {
+  update: Prisma.XOR<Prisma.supplierUpdateWithoutPrice_planInput, Prisma.supplierUncheckedUpdateWithoutPrice_planInput>
+  create: Prisma.XOR<Prisma.supplierCreateWithoutPrice_planInput, Prisma.supplierUncheckedCreateWithoutPrice_planInput>
+  where?: Prisma.supplierWhereInput
+}
+
+export type supplierUpdateToOneWithWhereWithoutPrice_planInput = {
+  where?: Prisma.supplierWhereInput
+  data: Prisma.XOR<Prisma.supplierUpdateWithoutPrice_planInput, Prisma.supplierUncheckedUpdateWithoutPrice_planInput>
+}
+
+export type supplierUpdateWithoutPrice_planInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  supplier_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type supplierUncheckedUpdateWithoutPrice_planInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  supplier_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+
+/**
+ * Count Type SupplierCountOutputType
+ */
+
+export type SupplierCountOutputType = {
+  price_plan: number
+}
+
+export type SupplierCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  price_plan?: boolean | SupplierCountOutputTypeCountPrice_planArgs
+}
+
+/**
+ * SupplierCountOutputType without action
+ */
+export type SupplierCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SupplierCountOutputType
+   */
+  select?: Prisma.SupplierCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * SupplierCountOutputType without action
+ */
+export type SupplierCountOutputTypeCountPrice_planArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.price_planWhereInput
+}
 
 
 export type supplierSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -359,6 +472,8 @@ export type supplierSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
+  price_plan?: boolean | Prisma.supplier$price_planArgs<ExtArgs>
+  _count?: boolean | Prisma.SupplierCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["supplier"]>
 
 export type supplierSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -392,10 +507,18 @@ export type supplierSelectScalar = {
 }
 
 export type supplierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "supplier_code" | "description" | "created_at" | "created_by" | "updated_at" | "updated_by", ExtArgs["result"]["supplier"]>
+export type supplierInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  price_plan?: boolean | Prisma.supplier$price_planArgs<ExtArgs>
+  _count?: boolean | Prisma.SupplierCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type supplierIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type supplierIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $supplierPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "supplier"
-  objects: {}
+  objects: {
+    price_plan: Prisma.$price_planPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     supplier_code: string | null
@@ -798,6 +921,7 @@ readonly fields: supplierFieldRefs;
  */
 export interface Prisma__supplierClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  price_plan<T extends Prisma.supplier$price_planArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.supplier$price_planArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$price_planPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -851,6 +975,10 @@ export type supplierFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.supplierOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.supplierInclude<ExtArgs> | null
+  /**
    * Filter, which supplier to fetch.
    */
   where: Prisma.supplierWhereUniqueInput
@@ -869,6 +997,10 @@ export type supplierFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.supplierOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.supplierInclude<ExtArgs> | null
+  /**
    * Filter, which supplier to fetch.
    */
   where: Prisma.supplierWhereUniqueInput
@@ -886,6 +1018,10 @@ export type supplierFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the supplier
    */
   omit?: Prisma.supplierOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.supplierInclude<ExtArgs> | null
   /**
    * Filter, which supplier to fetch.
    */
@@ -935,6 +1071,10 @@ export type supplierFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.supplierOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.supplierInclude<ExtArgs> | null
+  /**
    * Filter, which supplier to fetch.
    */
   where?: Prisma.supplierWhereInput
@@ -983,6 +1123,10 @@ export type supplierFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.supplierOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.supplierInclude<ExtArgs> | null
+  /**
    * Filter, which suppliers to fetch.
    */
   where?: Prisma.supplierWhereInput
@@ -1025,6 +1169,10 @@ export type supplierCreateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the supplier
    */
   omit?: Prisma.supplierOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.supplierInclude<ExtArgs> | null
   /**
    * The data needed to create a supplier.
    */
@@ -1073,6 +1221,10 @@ export type supplierUpdateArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the supplier
    */
   omit?: Prisma.supplierOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.supplierInclude<ExtArgs> | null
   /**
    * The data needed to update a supplier.
    */
@@ -1140,6 +1292,10 @@ export type supplierUpsertArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.supplierOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.supplierInclude<ExtArgs> | null
+  /**
    * The filter to search for the supplier to update in case it exists.
    */
   where: Prisma.supplierWhereUniqueInput
@@ -1166,6 +1322,10 @@ export type supplierDeleteArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.supplierOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.supplierInclude<ExtArgs> | null
+  /**
    * Filter which supplier to delete.
    */
   where: Prisma.supplierWhereUniqueInput
@@ -1186,6 +1346,30 @@ export type supplierDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * supplier.price_plan
+ */
+export type supplier$price_planArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the price_plan
+   */
+  select?: Prisma.price_planSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the price_plan
+   */
+  omit?: Prisma.price_planOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.price_planInclude<ExtArgs> | null
+  where?: Prisma.price_planWhereInput
+  orderBy?: Prisma.price_planOrderByWithRelationInput | Prisma.price_planOrderByWithRelationInput[]
+  cursor?: Prisma.price_planWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Price_planScalarFieldEnum | Prisma.Price_planScalarFieldEnum[]
+}
+
+/**
  * supplier without action
  */
 export type supplierDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1197,4 +1381,8 @@ export type supplierDefaultArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the supplier
    */
   omit?: Prisma.supplierOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.supplierInclude<ExtArgs> | null
 }

@@ -1,23 +1,25 @@
 import { MeterRecord } from './meter-record';
 import { ReadingValue } from '../value-objects/reading-value.vo';
+import { CreateMeterVO } from '../value-objects/create-meter.vo';
 
 export class Meter {
   private records: MeterRecord[] = [];
 
   constructor(
-    public readonly id: string,        // UUID
+    public readonly id: string,
+    public readonly customerId: string | null,        // UUID
     public readonly meterCode: string,
     public description: string | null,
     public pricePlanId: string | null, // nếu business cần
   ) {}
 
-  static create(code: string, description: string): Meter {
-    const normalizedCode = code.trim().toUpperCase();
-
-    
+  static create(customerId: string, code: string, description: string): Meter {
+    const meterVo = new CreateMeterVO(code);
+    const normalizedCode = meterVo.meterCode.toUpperCase();
 
     return new Meter(
       crypto.randomUUID(),
+      customerId,
       normalizedCode,
       description,
       null

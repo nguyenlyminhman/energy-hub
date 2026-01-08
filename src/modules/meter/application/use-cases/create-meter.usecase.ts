@@ -9,8 +9,8 @@ export class CreateMeterUseCase {
     private readonly meterRepo: IMeterRepository
   ) { }
 
-  async execute(cmd: { meterCode: string, description: string, createdBy: string }) {
-    const meter = Meter.create(cmd.meterCode, cmd.description);
+  async execute(cmd: { customerId: string, meterCode: string, description: string, createdBy: string }) {
+    const meter = Meter.create(cmd.customerId, cmd.meterCode, cmd.description);
     
     const exist = await this.meterRepo.findByCode(meter.meterCode);
     if (exist) {
