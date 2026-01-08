@@ -48,5 +48,4 @@ export class UsersController {
       return ResponseApi.error("", i18n.t('root.get_fail'));
     }
   }
-
 }
