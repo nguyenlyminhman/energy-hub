@@ -1,15 +1,14 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Post, Query } from '@nestjs/common';
 import { ApiBearerAuth, ApiCreatedResponse, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
-import { UsersCreateDto } from './dto/usersCreate.dto';
-import { UsersService } from './users.service';
+import { UsersService } from '../users.service';
 import { ResponseApi } from 'src/common/response.helper';
 import { I18n, I18nContext } from 'nestjs-i18n';
 import PaginationDto from 'src/common/dto/pagination.dto';
 import { ResponseDto } from 'src/common/payload.data';
 import { EApiPath, VERSION_1 } from 'src/objects/enum/EApiPath.enum';
 import { Public } from 'src/decorator/public.decorator';
-import { Roles } from 'src/decorator/roles.decorator';
 import { User } from 'src/decorator/user.decorator';
+import { CreateUserDto } from '../application/dtos/commands/create-user.dto';
 
 @ApiTags('Users')
 @Controller({ path: EApiPath.USER, version: VERSION_1 })
@@ -23,7 +22,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Done' })
   @ApiCreatedResponse({ description: 'Create a new user' })
   @ApiQuery({ name: 'lang', required: false, example: 'vi', })
-  async creatUser(@I18n() i18n: I18nContext, @Body() usersCreateDto: UsersCreateDto): Promise<ResponseApi> {
+  async creatUser(@I18n() i18n: I18nContext, @Body() usersCreateDto: CreateUserDto): Promise<ResponseApi> {
     try {
       const data: ResponseDto = await this.usersService.create(usersCreateDto);
 

@@ -1,4 +1,4 @@
-import { BaseEntity } from "src/modules/shared/base-entity";
+import { BaseEntity } from "src/modules/shared/domain/entities/base-entity";
 import { CreateCustomerVO } from "../value-objects/create-customer.vo";
 
 export class CustomerEntity extends BaseEntity {
