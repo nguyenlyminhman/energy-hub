@@ -34,7 +34,6 @@ export class UsersController {
     }
   }
 
-
   @Get("/get-all")
   @ApiBearerAuth()
   @HttpCode(HttpStatus.OK)
