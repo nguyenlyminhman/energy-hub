@@ -394,7 +394,6 @@ export const ModelName = {
   price_plan: 'price_plan',
   supplier: 'supplier',
   customer: 'customer',
-  customer_meter: 'customer_meter',
   meter_price_plan: 'meter_price_plan',
   users: 'users',
   meter_record: 'meter_record'
@@ -413,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "meter" | "price_plan" | "supplier" | "customer" | "customer_meter" | "meter_price_plan" | "users" | "meter_record"
+    modelProps: "meter" | "price_plan" | "supplier" | "customer" | "meter_price_plan" | "users" | "meter_record"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -713,80 +712,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    customer_meter: {
-      payload: Prisma.$customer_meterPayload<ExtArgs>
-      fields: Prisma.customer_meterFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.customer_meterFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$customer_meterPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.customer_meterFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$customer_meterPayload>
-        }
-        findFirst: {
-          args: Prisma.customer_meterFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$customer_meterPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.customer_meterFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$customer_meterPayload>
-        }
-        findMany: {
-          args: Prisma.customer_meterFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$customer_meterPayload>[]
-        }
-        create: {
-          args: Prisma.customer_meterCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$customer_meterPayload>
-        }
-        createMany: {
-          args: Prisma.customer_meterCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.customer_meterCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$customer_meterPayload>[]
-        }
-        delete: {
-          args: Prisma.customer_meterDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$customer_meterPayload>
-        }
-        update: {
-          args: Prisma.customer_meterUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$customer_meterPayload>
-        }
-        deleteMany: {
-          args: Prisma.customer_meterDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.customer_meterUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.customer_meterUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$customer_meterPayload>[]
-        }
-        upsert: {
-          args: Prisma.customer_meterUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$customer_meterPayload>
-        }
-        aggregate: {
-          args: Prisma.Customer_meterAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateCustomer_meter>
-        }
-        groupBy: {
-          args: Prisma.customer_meterGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Customer_meterGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.customer_meterCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Customer_meterCountAggregateOutputType> | number
-        }
-      }
-    }
     meter_price_plan: {
       payload: Prisma.$meter_price_planPayload<ExtArgs>
       fields: Prisma.meter_price_planFieldRefs
@@ -1055,7 +980,8 @@ export const MeterScalarFieldEnum = {
   created_at: 'created_at',
   created_by: 'created_by',
   updated_at: 'updated_at',
-  updated_by: 'updated_by'
+  updated_by: 'updated_by',
+  customer_id: 'customer_id'
 } as const
 
 export type MeterScalarFieldEnum = (typeof MeterScalarFieldEnum)[keyof typeof MeterScalarFieldEnum]
@@ -1063,12 +989,13 @@ export type MeterScalarFieldEnum = (typeof MeterScalarFieldEnum)[keyof typeof Me
 
 export const Price_planScalarFieldEnum = {
   id: 'id',
-  price_code: 'price_code',
+  price_plan_code: 'price_plan_code',
   description: 'description',
   created_at: 'created_at',
   created_by: 'created_by',
   updated_at: 'updated_at',
-  updated_by: 'updated_by'
+  updated_by: 'updated_by',
+  supplier_id: 'supplier_id'
 } as const
 
 export type Price_planScalarFieldEnum = (typeof Price_planScalarFieldEnum)[keyof typeof Price_planScalarFieldEnum]
@@ -1098,21 +1025,6 @@ export const CustomerScalarFieldEnum = {
 } as const
 
 export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
-
-
-export const Customer_meterScalarFieldEnum = {
-  id: 'id',
-  customer_id: 'customer_id',
-  meter_id: 'meter_id',
-  start_at: 'start_at',
-  end_at: 'end_at',
-  created_at: 'created_at',
-  created_by: 'created_by',
-  updated_at: 'updated_at',
-  updated_by: 'updated_by'
-} as const
-
-export type Customer_meterScalarFieldEnum = (typeof Customer_meterScalarFieldEnum)[keyof typeof Customer_meterScalarFieldEnum]
 
 
 export const Meter_price_planScalarFieldEnum = {
@@ -1335,7 +1247,6 @@ export type GlobalOmitConfig = {
   price_plan?: Prisma.price_planOmit
   supplier?: Prisma.supplierOmit
   customer?: Prisma.customerOmit
-  customer_meter?: Prisma.customer_meterOmit
   meter_price_plan?: Prisma.meter_price_planOmit
   users?: Prisma.usersOmit
   meter_record?: Prisma.meter_recordOmit

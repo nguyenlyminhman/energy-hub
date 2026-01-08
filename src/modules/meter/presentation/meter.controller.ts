@@ -43,6 +43,7 @@ export class MeterController {
   @Post('/register')
   async register(@I18n() i18n: I18nContext, @User() user: any, @Body() dto: CreateMeterDto) {
     const record: CreateMeterResponse = await this.createMeter.execute({
+      customerId: dto.customerId,
       meterCode: dto.meterCode,
       description: dto.description ?? "",
       createdBy: user?.id ?? 'SYSTEM',

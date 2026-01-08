@@ -53,7 +53,6 @@ export const ModelName = {
   price_plan: 'price_plan',
   supplier: 'supplier',
   customer: 'customer',
-  customer_meter: 'customer_meter',
   meter_price_plan: 'meter_price_plan',
   users: 'users',
   meter_record: 'meter_record'
@@ -82,7 +81,8 @@ export const MeterScalarFieldEnum = {
   created_at: 'created_at',
   created_by: 'created_by',
   updated_at: 'updated_at',
-  updated_by: 'updated_by'
+  updated_by: 'updated_by',
+  customer_id: 'customer_id'
 } as const
 
 export type MeterScalarFieldEnum = (typeof MeterScalarFieldEnum)[keyof typeof MeterScalarFieldEnum]
@@ -90,12 +90,13 @@ export type MeterScalarFieldEnum = (typeof MeterScalarFieldEnum)[keyof typeof Me
 
 export const Price_planScalarFieldEnum = {
   id: 'id',
-  price_code: 'price_code',
+  price_plan_code: 'price_plan_code',
   description: 'description',
   created_at: 'created_at',
   created_by: 'created_by',
   updated_at: 'updated_at',
-  updated_by: 'updated_by'
+  updated_by: 'updated_by',
+  supplier_id: 'supplier_id'
 } as const
 
 export type Price_planScalarFieldEnum = (typeof Price_planScalarFieldEnum)[keyof typeof Price_planScalarFieldEnum]
@@ -125,21 +126,6 @@ export const CustomerScalarFieldEnum = {
 } as const
 
 export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
-
-
-export const Customer_meterScalarFieldEnum = {
-  id: 'id',
-  customer_id: 'customer_id',
-  meter_id: 'meter_id',
-  start_at: 'start_at',
-  end_at: 'end_at',
-  created_at: 'created_at',
-  created_by: 'created_by',
-  updated_at: 'updated_at',
-  updated_by: 'updated_by'
-} as const
-
-export type Customer_meterScalarFieldEnum = (typeof Customer_meterScalarFieldEnum)[keyof typeof Customer_meterScalarFieldEnum]
 
 
 export const Meter_price_planScalarFieldEnum = {

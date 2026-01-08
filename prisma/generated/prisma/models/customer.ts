@@ -198,7 +198,7 @@ export type customerWhereInput = {
   created_by?: Prisma.StringNullableFilter<"customer"> | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"customer"> | Date | string | null
   updated_by?: Prisma.StringNullableFilter<"customer"> | string | null
-  customer_meter?: Prisma.Customer_meterListRelationFilter
+  meter?: Prisma.MeterListRelationFilter
 }
 
 export type customerOrderByWithRelationInput = {
@@ -209,7 +209,7 @@ export type customerOrderByWithRelationInput = {
   created_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
-  customer_meter?: Prisma.customer_meterOrderByRelationAggregateInput
+  meter?: Prisma.meterOrderByRelationAggregateInput
 }
 
 export type customerWhereUniqueInput = Prisma.AtLeast<{
@@ -223,7 +223,7 @@ export type customerWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.StringNullableFilter<"customer"> | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"customer"> | Date | string | null
   updated_by?: Prisma.StringNullableFilter<"customer"> | string | null
-  customer_meter?: Prisma.Customer_meterListRelationFilter
+  meter?: Prisma.MeterListRelationFilter
 }, "id" | "customer_code">
 
 export type customerOrderByWithAggregationInput = {
@@ -260,7 +260,7 @@ export type customerCreateInput = {
   created_by?: string | null
   updated_at?: Date | string | null
   updated_by?: string | null
-  customer_meter?: Prisma.customer_meterCreateNestedManyWithoutCustomerInput
+  meter?: Prisma.meterCreateNestedManyWithoutCustomerInput
 }
 
 export type customerUncheckedCreateInput = {
@@ -271,7 +271,7 @@ export type customerUncheckedCreateInput = {
   created_by?: string | null
   updated_at?: Date | string | null
   updated_by?: string | null
-  customer_meter?: Prisma.customer_meterUncheckedCreateNestedManyWithoutCustomerInput
+  meter?: Prisma.meterUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type customerUpdateInput = {
@@ -282,7 +282,7 @@ export type customerUpdateInput = {
   created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  customer_meter?: Prisma.customer_meterUpdateManyWithoutCustomerNestedInput
+  meter?: Prisma.meterUpdateManyWithoutCustomerNestedInput
 }
 
 export type customerUncheckedUpdateInput = {
@@ -293,7 +293,7 @@ export type customerUncheckedUpdateInput = {
   created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  customer_meter?: Prisma.customer_meterUncheckedUpdateManyWithoutCustomerNestedInput
+  meter?: Prisma.meterUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type customerCreateManyInput = {
@@ -326,6 +326,11 @@ export type customerUncheckedUpdateManyInput = {
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
+export type CustomerNullableScalarRelationFilter = {
+  is?: Prisma.customerWhereInput | null
+  isNot?: Prisma.customerWhereInput | null
+}
+
 export type customerCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   customer_code?: Prisma.SortOrder
@@ -356,28 +361,23 @@ export type customerMinOrderByAggregateInput = {
   updated_by?: Prisma.SortOrder
 }
 
-export type CustomerNullableScalarRelationFilter = {
-  is?: Prisma.customerWhereInput | null
-  isNot?: Prisma.customerWhereInput | null
-}
-
-export type customerCreateNestedOneWithoutCustomer_meterInput = {
-  create?: Prisma.XOR<Prisma.customerCreateWithoutCustomer_meterInput, Prisma.customerUncheckedCreateWithoutCustomer_meterInput>
-  connectOrCreate?: Prisma.customerCreateOrConnectWithoutCustomer_meterInput
+export type customerCreateNestedOneWithoutMeterInput = {
+  create?: Prisma.XOR<Prisma.customerCreateWithoutMeterInput, Prisma.customerUncheckedCreateWithoutMeterInput>
+  connectOrCreate?: Prisma.customerCreateOrConnectWithoutMeterInput
   connect?: Prisma.customerWhereUniqueInput
 }
 
-export type customerUpdateOneWithoutCustomer_meterNestedInput = {
-  create?: Prisma.XOR<Prisma.customerCreateWithoutCustomer_meterInput, Prisma.customerUncheckedCreateWithoutCustomer_meterInput>
-  connectOrCreate?: Prisma.customerCreateOrConnectWithoutCustomer_meterInput
-  upsert?: Prisma.customerUpsertWithoutCustomer_meterInput
+export type customerUpdateOneWithoutMeterNestedInput = {
+  create?: Prisma.XOR<Prisma.customerCreateWithoutMeterInput, Prisma.customerUncheckedCreateWithoutMeterInput>
+  connectOrCreate?: Prisma.customerCreateOrConnectWithoutMeterInput
+  upsert?: Prisma.customerUpsertWithoutMeterInput
   disconnect?: Prisma.customerWhereInput | boolean
   delete?: Prisma.customerWhereInput | boolean
   connect?: Prisma.customerWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.customerUpdateToOneWithWhereWithoutCustomer_meterInput, Prisma.customerUpdateWithoutCustomer_meterInput>, Prisma.customerUncheckedUpdateWithoutCustomer_meterInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.customerUpdateToOneWithWhereWithoutMeterInput, Prisma.customerUpdateWithoutMeterInput>, Prisma.customerUncheckedUpdateWithoutMeterInput>
 }
 
-export type customerCreateWithoutCustomer_meterInput = {
+export type customerCreateWithoutMeterInput = {
   id: string
   customer_code: string
   description?: string | null
@@ -387,7 +387,7 @@ export type customerCreateWithoutCustomer_meterInput = {
   updated_by?: string | null
 }
 
-export type customerUncheckedCreateWithoutCustomer_meterInput = {
+export type customerUncheckedCreateWithoutMeterInput = {
   id: string
   customer_code: string
   description?: string | null
@@ -397,23 +397,23 @@ export type customerUncheckedCreateWithoutCustomer_meterInput = {
   updated_by?: string | null
 }
 
-export type customerCreateOrConnectWithoutCustomer_meterInput = {
+export type customerCreateOrConnectWithoutMeterInput = {
   where: Prisma.customerWhereUniqueInput
-  create: Prisma.XOR<Prisma.customerCreateWithoutCustomer_meterInput, Prisma.customerUncheckedCreateWithoutCustomer_meterInput>
+  create: Prisma.XOR<Prisma.customerCreateWithoutMeterInput, Prisma.customerUncheckedCreateWithoutMeterInput>
 }
 
-export type customerUpsertWithoutCustomer_meterInput = {
-  update: Prisma.XOR<Prisma.customerUpdateWithoutCustomer_meterInput, Prisma.customerUncheckedUpdateWithoutCustomer_meterInput>
-  create: Prisma.XOR<Prisma.customerCreateWithoutCustomer_meterInput, Prisma.customerUncheckedCreateWithoutCustomer_meterInput>
+export type customerUpsertWithoutMeterInput = {
+  update: Prisma.XOR<Prisma.customerUpdateWithoutMeterInput, Prisma.customerUncheckedUpdateWithoutMeterInput>
+  create: Prisma.XOR<Prisma.customerCreateWithoutMeterInput, Prisma.customerUncheckedCreateWithoutMeterInput>
   where?: Prisma.customerWhereInput
 }
 
-export type customerUpdateToOneWithWhereWithoutCustomer_meterInput = {
+export type customerUpdateToOneWithWhereWithoutMeterInput = {
   where?: Prisma.customerWhereInput
-  data: Prisma.XOR<Prisma.customerUpdateWithoutCustomer_meterInput, Prisma.customerUncheckedUpdateWithoutCustomer_meterInput>
+  data: Prisma.XOR<Prisma.customerUpdateWithoutMeterInput, Prisma.customerUncheckedUpdateWithoutMeterInput>
 }
 
-export type customerUpdateWithoutCustomer_meterInput = {
+export type customerUpdateWithoutMeterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   customer_code?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -423,7 +423,7 @@ export type customerUpdateWithoutCustomer_meterInput = {
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
-export type customerUncheckedUpdateWithoutCustomer_meterInput = {
+export type customerUncheckedUpdateWithoutMeterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   customer_code?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -439,11 +439,11 @@ export type customerUncheckedUpdateWithoutCustomer_meterInput = {
  */
 
 export type CustomerCountOutputType = {
-  customer_meter: number
+  meter: number
 }
 
 export type CustomerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  customer_meter?: boolean | CustomerCountOutputTypeCountCustomer_meterArgs
+  meter?: boolean | CustomerCountOutputTypeCountMeterArgs
 }
 
 /**
@@ -459,8 +459,8 @@ export type CustomerCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
 /**
  * CustomerCountOutputType without action
  */
-export type CustomerCountOutputTypeCountCustomer_meterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.customer_meterWhereInput
+export type CustomerCountOutputTypeCountMeterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.meterWhereInput
 }
 
 
@@ -472,7 +472,7 @@ export type customerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
-  customer_meter?: boolean | Prisma.customer$customer_meterArgs<ExtArgs>
+  meter?: boolean | Prisma.customer$meterArgs<ExtArgs>
   _count?: boolean | Prisma.CustomerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["customer"]>
 
@@ -508,7 +508,7 @@ export type customerSelectScalar = {
 
 export type customerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "customer_code" | "description" | "created_at" | "created_by" | "updated_at" | "updated_by", ExtArgs["result"]["customer"]>
 export type customerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  customer_meter?: boolean | Prisma.customer$customer_meterArgs<ExtArgs>
+  meter?: boolean | Prisma.customer$meterArgs<ExtArgs>
   _count?: boolean | Prisma.CustomerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type customerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -517,7 +517,7 @@ export type customerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type $customerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "customer"
   objects: {
-    customer_meter: Prisma.$customer_meterPayload<ExtArgs>[]
+    meter: Prisma.$meterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -921,7 +921,7 @@ readonly fields: customerFieldRefs;
  */
 export interface Prisma__customerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  customer_meter<T extends Prisma.customer$customer_meterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.customer$customer_meterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$customer_meterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  meter<T extends Prisma.customer$meterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.customer$meterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$meterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1346,27 +1346,27 @@ export type customerDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * customer.customer_meter
+ * customer.meter
  */
-export type customer$customer_meterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type customer$meterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the customer_meter
+   * Select specific fields to fetch from the meter
    */
-  select?: Prisma.customer_meterSelect<ExtArgs> | null
+  select?: Prisma.meterSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the customer_meter
+   * Omit specific fields from the meter
    */
-  omit?: Prisma.customer_meterOmit<ExtArgs> | null
+  omit?: Prisma.meterOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.customer_meterInclude<ExtArgs> | null
-  where?: Prisma.customer_meterWhereInput
-  orderBy?: Prisma.customer_meterOrderByWithRelationInput | Prisma.customer_meterOrderByWithRelationInput[]
-  cursor?: Prisma.customer_meterWhereUniqueInput
+  include?: Prisma.meterInclude<ExtArgs> | null
+  where?: Prisma.meterWhereInput
+  orderBy?: Prisma.meterOrderByWithRelationInput | Prisma.meterOrderByWithRelationInput[]
+  cursor?: Prisma.meterWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.Customer_meterScalarFieldEnum | Prisma.Customer_meterScalarFieldEnum[]
+  distinct?: Prisma.MeterScalarFieldEnum | Prisma.MeterScalarFieldEnum[]
 }
 
 /**

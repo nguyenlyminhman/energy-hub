@@ -63,11 +63,6 @@ export type supplier = Prisma.supplierModel
  */
 export type customer = Prisma.customerModel
 /**
- * Model customer_meter
- * 
- */
-export type customer_meter = Prisma.customer_meterModel
-/**
  * Model meter_price_plan
  * 
  */

@@ -26,64 +26,70 @@ export type AggregatePrice_plan = {
 
 export type Price_planMinAggregateOutputType = {
   id: string | null
-  price_code: string | null
+  price_plan_code: string | null
   description: string | null
   created_at: Date | null
   created_by: string | null
   updated_at: Date | null
   updated_by: string | null
+  supplier_id: string | null
 }
 
 export type Price_planMaxAggregateOutputType = {
   id: string | null
-  price_code: string | null
+  price_plan_code: string | null
   description: string | null
   created_at: Date | null
   created_by: string | null
   updated_at: Date | null
   updated_by: string | null
+  supplier_id: string | null
 }
 
 export type Price_planCountAggregateOutputType = {
   id: number
-  price_code: number
+  price_plan_code: number
   description: number
   created_at: number
   created_by: number
   updated_at: number
   updated_by: number
+  supplier_id: number
   _all: number
 }
 
 
 export type Price_planMinAggregateInputType = {
   id?: true
-  price_code?: true
+  price_plan_code?: true
   description?: true
   created_at?: true
   created_by?: true
   updated_at?: true
   updated_by?: true
+  supplier_id?: true
 }
 
 export type Price_planMaxAggregateInputType = {
   id?: true
-  price_code?: true
+  price_plan_code?: true
   description?: true
   created_at?: true
   created_by?: true
   updated_at?: true
   updated_by?: true
+  supplier_id?: true
 }
 
 export type Price_planCountAggregateInputType = {
   id?: true
-  price_code?: true
+  price_plan_code?: true
   description?: true
   created_at?: true
   created_by?: true
   updated_at?: true
   updated_by?: true
+  supplier_id?: true
   _all?: true
 }
 
@@ -161,12 +167,13 @@ export type price_planGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 
 export type Price_planGroupByOutputType = {
   id: string
-  price_code: string | null
+  price_plan_code: string | null
   description: string | null
   created_at: Date | null
   created_by: string | null
   updated_at: Date | null
   updated_by: string | null
+  supplier_id: string | null
   _count: Price_planCountAggregateOutputType | null
   _min: Price_planMinAggregateOutputType | null
   _max: Price_planMaxAggregateOutputType | null
@@ -192,29 +199,33 @@ export type price_planWhereInput = {
   OR?: Prisma.price_planWhereInput[]
   NOT?: Prisma.price_planWhereInput | Prisma.price_planWhereInput[]
   id?: Prisma.UuidFilter<"price_plan"> | string
-  price_code?: Prisma.StringNullableFilter<"price_plan"> | string | null
+  price_plan_code?: Prisma.StringNullableFilter<"price_plan"> | string | null
   description?: Prisma.StringNullableFilter<"price_plan"> | string | null
   created_at?: Prisma.DateTimeNullableFilter<"price_plan"> | Date | string | null
   created_by?: Prisma.StringNullableFilter<"price_plan"> | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"price_plan"> | Date | string | null
   updated_by?: Prisma.StringNullableFilter<"price_plan"> | string | null
+  supplier_id?: Prisma.UuidNullableFilter<"price_plan"> | string | null
   meter_price_plan?: Prisma.Meter_price_planListRelationFilter
+  supplier?: Prisma.XOR<Prisma.SupplierNullableScalarRelationFilter, Prisma.supplierWhereInput> | null
 }
 
 export type price_planOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  price_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  price_plan_code?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  supplier_id?: Prisma.SortOrderInput | Prisma.SortOrder
   meter_price_plan?: Prisma.meter_price_planOrderByRelationAggregateInput
+  supplier?: Prisma.supplierOrderByWithRelationInput
 }
 
 export type price_planWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  price_code?: string
+  price_plan_code?: string
   AND?: Prisma.price_planWhereInput | Prisma.price_planWhereInput[]
   OR?: Prisma.price_planWhereInput[]
   NOT?: Prisma.price_planWhereInput | Prisma.price_planWhereInput[]
@@ -223,17 +234,20 @@ export type price_planWhereUniqueInput = Prisma.AtLeast<{
   created_by?: Prisma.StringNullableFilter<"price_plan"> | string | null
   updated_at?: Prisma.DateTimeNullableFilter<"price_plan"> | Date | string | null
   updated_by?: Prisma.StringNullableFilter<"price_plan"> | string | null
+  supplier_id?: Prisma.UuidNullableFilter<"price_plan"> | string | null
   meter_price_plan?: Prisma.Meter_price_planListRelationFilter
-}, "id" | "price_code">
+  supplier?: Prisma.XOR<Prisma.SupplierNullableScalarRelationFilter, Prisma.supplierWhereInput> | null
+}, "id" | "price_plan_code">
 
 export type price_planOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  price_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  price_plan_code?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  supplier_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.price_planCountOrderByAggregateInput
   _max?: Prisma.price_planMaxOrderByAggregateInput
   _min?: Prisma.price_planMinOrderByAggregateInput
@@ -244,71 +258,77 @@ export type price_planScalarWhereWithAggregatesInput = {
   OR?: Prisma.price_planScalarWhereWithAggregatesInput[]
   NOT?: Prisma.price_planScalarWhereWithAggregatesInput | Prisma.price_planScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"price_plan"> | string
-  price_code?: Prisma.StringNullableWithAggregatesFilter<"price_plan"> | string | null
+  price_plan_code?: Prisma.StringNullableWithAggregatesFilter<"price_plan"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"price_plan"> | string | null
   created_at?: Prisma.DateTimeNullableWithAggregatesFilter<"price_plan"> | Date | string | null
   created_by?: Prisma.StringNullableWithAggregatesFilter<"price_plan"> | string | null
   updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"price_plan"> | Date | string | null
   updated_by?: Prisma.StringNullableWithAggregatesFilter<"price_plan"> | string | null
+  supplier_id?: Prisma.UuidNullableWithAggregatesFilter<"price_plan"> | string | null
 }
 
 export type price_planCreateInput = {
   id: string
-  price_code?: string | null
+  price_plan_code?: string | null
   description?: string | null
   created_at?: Date | string | null
   created_by?: string | null
   updated_at?: Date | string | null
   updated_by?: string | null
   meter_price_plan?: Prisma.meter_price_planCreateNestedManyWithoutPrice_planInput
+  supplier?: Prisma.supplierCreateNestedOneWithoutPrice_planInput
 }
 
 export type price_planUncheckedCreateInput = {
   id: string
-  price_code?: string | null
+  price_plan_code?: string | null
   description?: string | null
   created_at?: Date | string | null
   created_by?: string | null
   updated_at?: Date | string | null
   updated_by?: string | null
+  supplier_id?: string | null
   meter_price_plan?: Prisma.meter_price_planUncheckedCreateNestedManyWithoutPrice_planInput
 }
 
 export type price_planUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  price_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price_plan_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   meter_price_plan?: Prisma.meter_price_planUpdateManyWithoutPrice_planNestedInput
+  supplier?: Prisma.supplierUpdateOneWithoutPrice_planNestedInput
 }
 
 export type price_planUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  price_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price_plan_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supplier_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   meter_price_plan?: Prisma.meter_price_planUncheckedUpdateManyWithoutPrice_planNestedInput
 }
 
 export type price_planCreateManyInput = {
   id: string
-  price_code?: string | null
+  price_plan_code?: string | null
   description?: string | null
   created_at?: Date | string | null
   created_by?: string | null
   updated_at?: Date | string | null
   updated_by?: string | null
+  supplier_id?: string | null
 }
 
 export type price_planUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  price_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price_plan_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -318,47 +338,103 @@ export type price_planUpdateManyMutationInput = {
 
 export type price_planUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  price_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price_plan_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supplier_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type price_planCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  price_code?: Prisma.SortOrder
+  price_plan_code?: Prisma.SortOrder
   description?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  supplier_id?: Prisma.SortOrder
 }
 
 export type price_planMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  price_code?: Prisma.SortOrder
+  price_plan_code?: Prisma.SortOrder
   description?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  supplier_id?: Prisma.SortOrder
 }
 
 export type price_planMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  price_code?: Prisma.SortOrder
+  price_plan_code?: Prisma.SortOrder
   description?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  supplier_id?: Prisma.SortOrder
+}
+
+export type Price_planListRelationFilter = {
+  every?: Prisma.price_planWhereInput
+  some?: Prisma.price_planWhereInput
+  none?: Prisma.price_planWhereInput
+}
+
+export type price_planOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type Price_planNullableScalarRelationFilter = {
   is?: Prisma.price_planWhereInput | null
   isNot?: Prisma.price_planWhereInput | null
+}
+
+export type price_planCreateNestedManyWithoutSupplierInput = {
+  create?: Prisma.XOR<Prisma.price_planCreateWithoutSupplierInput, Prisma.price_planUncheckedCreateWithoutSupplierInput> | Prisma.price_planCreateWithoutSupplierInput[] | Prisma.price_planUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.price_planCreateOrConnectWithoutSupplierInput | Prisma.price_planCreateOrConnectWithoutSupplierInput[]
+  createMany?: Prisma.price_planCreateManySupplierInputEnvelope
+  connect?: Prisma.price_planWhereUniqueInput | Prisma.price_planWhereUniqueInput[]
+}
+
+export type price_planUncheckedCreateNestedManyWithoutSupplierInput = {
+  create?: Prisma.XOR<Prisma.price_planCreateWithoutSupplierInput, Prisma.price_planUncheckedCreateWithoutSupplierInput> | Prisma.price_planCreateWithoutSupplierInput[] | Prisma.price_planUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.price_planCreateOrConnectWithoutSupplierInput | Prisma.price_planCreateOrConnectWithoutSupplierInput[]
+  createMany?: Prisma.price_planCreateManySupplierInputEnvelope
+  connect?: Prisma.price_planWhereUniqueInput | Prisma.price_planWhereUniqueInput[]
+}
+
+export type price_planUpdateManyWithoutSupplierNestedInput = {
+  create?: Prisma.XOR<Prisma.price_planCreateWithoutSupplierInput, Prisma.price_planUncheckedCreateWithoutSupplierInput> | Prisma.price_planCreateWithoutSupplierInput[] | Prisma.price_planUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.price_planCreateOrConnectWithoutSupplierInput | Prisma.price_planCreateOrConnectWithoutSupplierInput[]
+  upsert?: Prisma.price_planUpsertWithWhereUniqueWithoutSupplierInput | Prisma.price_planUpsertWithWhereUniqueWithoutSupplierInput[]
+  createMany?: Prisma.price_planCreateManySupplierInputEnvelope
+  set?: Prisma.price_planWhereUniqueInput | Prisma.price_planWhereUniqueInput[]
+  disconnect?: Prisma.price_planWhereUniqueInput | Prisma.price_planWhereUniqueInput[]
+  delete?: Prisma.price_planWhereUniqueInput | Prisma.price_planWhereUniqueInput[]
+  connect?: Prisma.price_planWhereUniqueInput | Prisma.price_planWhereUniqueInput[]
+  update?: Prisma.price_planUpdateWithWhereUniqueWithoutSupplierInput | Prisma.price_planUpdateWithWhereUniqueWithoutSupplierInput[]
+  updateMany?: Prisma.price_planUpdateManyWithWhereWithoutSupplierInput | Prisma.price_planUpdateManyWithWhereWithoutSupplierInput[]
+  deleteMany?: Prisma.price_planScalarWhereInput | Prisma.price_planScalarWhereInput[]
+}
+
+export type price_planUncheckedUpdateManyWithoutSupplierNestedInput = {
+  create?: Prisma.XOR<Prisma.price_planCreateWithoutSupplierInput, Prisma.price_planUncheckedCreateWithoutSupplierInput> | Prisma.price_planCreateWithoutSupplierInput[] | Prisma.price_planUncheckedCreateWithoutSupplierInput[]
+  connectOrCreate?: Prisma.price_planCreateOrConnectWithoutSupplierInput | Prisma.price_planCreateOrConnectWithoutSupplierInput[]
+  upsert?: Prisma.price_planUpsertWithWhereUniqueWithoutSupplierInput | Prisma.price_planUpsertWithWhereUniqueWithoutSupplierInput[]
+  createMany?: Prisma.price_planCreateManySupplierInputEnvelope
+  set?: Prisma.price_planWhereUniqueInput | Prisma.price_planWhereUniqueInput[]
+  disconnect?: Prisma.price_planWhereUniqueInput | Prisma.price_planWhereUniqueInput[]
+  delete?: Prisma.price_planWhereUniqueInput | Prisma.price_planWhereUniqueInput[]
+  connect?: Prisma.price_planWhereUniqueInput | Prisma.price_planWhereUniqueInput[]
+  update?: Prisma.price_planUpdateWithWhereUniqueWithoutSupplierInput | Prisma.price_planUpdateWithWhereUniqueWithoutSupplierInput[]
+  updateMany?: Prisma.price_planUpdateManyWithWhereWithoutSupplierInput | Prisma.price_planUpdateManyWithWhereWithoutSupplierInput[]
+  deleteMany?: Prisma.price_planScalarWhereInput | Prisma.price_planScalarWhereInput[]
 }
 
 export type price_planCreateNestedOneWithoutMeter_price_planInput = {
@@ -377,24 +453,88 @@ export type price_planUpdateOneWithoutMeter_price_planNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.price_planUpdateToOneWithWhereWithoutMeter_price_planInput, Prisma.price_planUpdateWithoutMeter_price_planInput>, Prisma.price_planUncheckedUpdateWithoutMeter_price_planInput>
 }
 
-export type price_planCreateWithoutMeter_price_planInput = {
+export type price_planCreateWithoutSupplierInput = {
   id: string
-  price_code?: string | null
+  price_plan_code?: string | null
   description?: string | null
   created_at?: Date | string | null
   created_by?: string | null
   updated_at?: Date | string | null
   updated_by?: string | null
+  meter_price_plan?: Prisma.meter_price_planCreateNestedManyWithoutPrice_planInput
+}
+
+export type price_planUncheckedCreateWithoutSupplierInput = {
+  id: string
+  price_plan_code?: string | null
+  description?: string | null
+  created_at?: Date | string | null
+  created_by?: string | null
+  updated_at?: Date | string | null
+  updated_by?: string | null
+  meter_price_plan?: Prisma.meter_price_planUncheckedCreateNestedManyWithoutPrice_planInput
+}
+
+export type price_planCreateOrConnectWithoutSupplierInput = {
+  where: Prisma.price_planWhereUniqueInput
+  create: Prisma.XOR<Prisma.price_planCreateWithoutSupplierInput, Prisma.price_planUncheckedCreateWithoutSupplierInput>
+}
+
+export type price_planCreateManySupplierInputEnvelope = {
+  data: Prisma.price_planCreateManySupplierInput | Prisma.price_planCreateManySupplierInput[]
+  skipDuplicates?: boolean
+}
+
+export type price_planUpsertWithWhereUniqueWithoutSupplierInput = {
+  where: Prisma.price_planWhereUniqueInput
+  update: Prisma.XOR<Prisma.price_planUpdateWithoutSupplierInput, Prisma.price_planUncheckedUpdateWithoutSupplierInput>
+  create: Prisma.XOR<Prisma.price_planCreateWithoutSupplierInput, Prisma.price_planUncheckedCreateWithoutSupplierInput>
+}
+
+export type price_planUpdateWithWhereUniqueWithoutSupplierInput = {
+  where: Prisma.price_planWhereUniqueInput
+  data: Prisma.XOR<Prisma.price_planUpdateWithoutSupplierInput, Prisma.price_planUncheckedUpdateWithoutSupplierInput>
+}
+
+export type price_planUpdateManyWithWhereWithoutSupplierInput = {
+  where: Prisma.price_planScalarWhereInput
+  data: Prisma.XOR<Prisma.price_planUpdateManyMutationInput, Prisma.price_planUncheckedUpdateManyWithoutSupplierInput>
+}
+
+export type price_planScalarWhereInput = {
+  AND?: Prisma.price_planScalarWhereInput | Prisma.price_planScalarWhereInput[]
+  OR?: Prisma.price_planScalarWhereInput[]
+  NOT?: Prisma.price_planScalarWhereInput | Prisma.price_planScalarWhereInput[]
+  id?: Prisma.UuidFilter<"price_plan"> | string
+  price_plan_code?: Prisma.StringNullableFilter<"price_plan"> | string | null
+  description?: Prisma.StringNullableFilter<"price_plan"> | string | null
+  created_at?: Prisma.DateTimeNullableFilter<"price_plan"> | Date | string | null
+  created_by?: Prisma.StringNullableFilter<"price_plan"> | string | null
+  updated_at?: Prisma.DateTimeNullableFilter<"price_plan"> | Date | string | null
+  updated_by?: Prisma.StringNullableFilter<"price_plan"> | string | null
+  supplier_id?: Prisma.UuidNullableFilter<"price_plan"> | string | null
+}
+
+export type price_planCreateWithoutMeter_price_planInput = {
+  id: string
+  price_plan_code?: string | null
+  description?: string | null
+  created_at?: Date | string | null
+  created_by?: string | null
+  updated_at?: Date | string | null
+  updated_by?: string | null
+  supplier?: Prisma.supplierCreateNestedOneWithoutPrice_planInput
 }
 
 export type price_planUncheckedCreateWithoutMeter_price_planInput = {
   id: string
-  price_code?: string | null
+  price_plan_code?: string | null
   description?: string | null
   created_at?: Date | string | null
   created_by?: string | null
   updated_at?: Date | string | null
   updated_by?: string | null
+  supplier_id?: string | null
 }
 
 export type price_planCreateOrConnectWithoutMeter_price_planInput = {
@@ -415,17 +555,61 @@ export type price_planUpdateToOneWithWhereWithoutMeter_price_planInput = {
 
 export type price_planUpdateWithoutMeter_price_planInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  price_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price_plan_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supplier?: Prisma.supplierUpdateOneWithoutPrice_planNestedInput
 }
 
 export type price_planUncheckedUpdateWithoutMeter_price_planInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  price_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price_plan_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supplier_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type price_planCreateManySupplierInput = {
+  id: string
+  price_plan_code?: string | null
+  description?: string | null
+  created_at?: Date | string | null
+  created_by?: string | null
+  updated_at?: Date | string | null
+  updated_by?: string | null
+}
+
+export type price_planUpdateWithoutSupplierInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  price_plan_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meter_price_plan?: Prisma.meter_price_planUpdateManyWithoutPrice_planNestedInput
+}
+
+export type price_planUncheckedUpdateWithoutSupplierInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  price_plan_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updated_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meter_price_plan?: Prisma.meter_price_planUncheckedUpdateManyWithoutPrice_planNestedInput
+}
+
+export type price_planUncheckedUpdateManyWithoutSupplierInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  price_plan_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   created_by?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -466,67 +650,81 @@ export type Price_planCountOutputTypeCountMeter_price_planArgs<ExtArgs extends r
 
 export type price_planSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  price_code?: boolean
+  price_plan_code?: boolean
   description?: boolean
   created_at?: boolean
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
+  supplier_id?: boolean
   meter_price_plan?: boolean | Prisma.price_plan$meter_price_planArgs<ExtArgs>
+  supplier?: boolean | Prisma.price_plan$supplierArgs<ExtArgs>
   _count?: boolean | Prisma.Price_planCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["price_plan"]>
 
 export type price_planSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  price_code?: boolean
+  price_plan_code?: boolean
   description?: boolean
   created_at?: boolean
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
+  supplier_id?: boolean
+  supplier?: boolean | Prisma.price_plan$supplierArgs<ExtArgs>
 }, ExtArgs["result"]["price_plan"]>
 
 export type price_planSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  price_code?: boolean
+  price_plan_code?: boolean
   description?: boolean
   created_at?: boolean
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
+  supplier_id?: boolean
+  supplier?: boolean | Prisma.price_plan$supplierArgs<ExtArgs>
 }, ExtArgs["result"]["price_plan"]>
 
 export type price_planSelectScalar = {
   id?: boolean
-  price_code?: boolean
+  price_plan_code?: boolean
   description?: boolean
   created_at?: boolean
   created_by?: boolean
   updated_at?: boolean
   updated_by?: boolean
+  supplier_id?: boolean
 }
 
-export type price_planOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "price_code" | "description" | "created_at" | "created_by" | "updated_at" | "updated_by", ExtArgs["result"]["price_plan"]>
+export type price_planOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "price_plan_code" | "description" | "created_at" | "created_by" | "updated_at" | "updated_by" | "supplier_id", ExtArgs["result"]["price_plan"]>
 export type price_planInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   meter_price_plan?: boolean | Prisma.price_plan$meter_price_planArgs<ExtArgs>
+  supplier?: boolean | Prisma.price_plan$supplierArgs<ExtArgs>
   _count?: boolean | Prisma.Price_planCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type price_planIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type price_planIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type price_planIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  supplier?: boolean | Prisma.price_plan$supplierArgs<ExtArgs>
+}
+export type price_planIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  supplier?: boolean | Prisma.price_plan$supplierArgs<ExtArgs>
+}
 
 export type $price_planPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "price_plan"
   objects: {
     meter_price_plan: Prisma.$meter_price_planPayload<ExtArgs>[]
+    supplier: Prisma.$supplierPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    price_code: string | null
+    price_plan_code: string | null
     description: string | null
     created_at: Date | null
     created_by: string | null
     updated_at: Date | null
     updated_by: string | null
+    supplier_id: string | null
   }, ExtArgs["result"]["price_plan"]>
   composites: {}
 }
@@ -922,6 +1120,7 @@ readonly fields: price_planFieldRefs;
 export interface Prisma__price_planClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   meter_price_plan<T extends Prisma.price_plan$meter_price_planArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.price_plan$meter_price_planArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$meter_price_planPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  supplier<T extends Prisma.price_plan$supplierArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.price_plan$supplierArgs<ExtArgs>>): Prisma.Prisma__supplierClient<runtime.Types.Result.GetResult<Prisma.$supplierPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -952,12 +1151,13 @@ export interface Prisma__price_planClient<T, Null = never, ExtArgs extends runti
  */
 export interface price_planFieldRefs {
   readonly id: Prisma.FieldRef<"price_plan", 'String'>
-  readonly price_code: Prisma.FieldRef<"price_plan", 'String'>
+  readonly price_plan_code: Prisma.FieldRef<"price_plan", 'String'>
   readonly description: Prisma.FieldRef<"price_plan", 'String'>
   readonly created_at: Prisma.FieldRef<"price_plan", 'DateTime'>
   readonly created_by: Prisma.FieldRef<"price_plan", 'String'>
   readonly updated_at: Prisma.FieldRef<"price_plan", 'DateTime'>
   readonly updated_by: Prisma.FieldRef<"price_plan", 'String'>
+  readonly supplier_id: Prisma.FieldRef<"price_plan", 'String'>
 }
     
 
@@ -1207,6 +1407,10 @@ export type price_planCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    */
   data: Prisma.price_planCreateManyInput | Prisma.price_planCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.price_planIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1277,6 +1481,10 @@ export type price_planUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * Limit how many price_plans to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.price_planIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1367,6 +1575,25 @@ export type price_plan$meter_price_planArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.Meter_price_planScalarFieldEnum | Prisma.Meter_price_planScalarFieldEnum[]
+}
+
+/**
+ * price_plan.supplier
+ */
+export type price_plan$supplierArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the supplier
+   */
+  select?: Prisma.supplierSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the supplier
+   */
+  omit?: Prisma.supplierOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.supplierInclude<ExtArgs> | null
+  where?: Prisma.supplierWhereInput
 }
 
 /**

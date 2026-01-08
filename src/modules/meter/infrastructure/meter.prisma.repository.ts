@@ -55,6 +55,7 @@ export class MeterPrismaRepository implements IMeterRepository {
 
     return new Meter(
       r.id,
+      r.customer_id,
       r.meter_code,
       r.description,
       null
@@ -84,6 +85,7 @@ export class MeterPrismaRepository implements IMeterRepository {
     await this.prisma.meter.create({
       data: {
         id: meter.id,
+        customer_id: meter.customerId,
         meter_code: meter.meterCode,
         description: meter.description,
         created_at: new Date(),
