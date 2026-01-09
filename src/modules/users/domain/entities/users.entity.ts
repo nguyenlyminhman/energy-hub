@@ -1,5 +1,4 @@
 import { BaseEntity } from "src/modules/shared/domain/entities/base-entity";
-import { AppUtil } from "src/utils/app.util";
 
 export class UsersEntity extends BaseEntity {
   constructor(
@@ -24,14 +23,11 @@ export class UsersEntity extends BaseEntity {
     createdBy: string | null,
   ): UsersEntity {
     const now = new Date();
-    //   const cusVo = new CreateUserVO();
-    const hashedPassword = AppUtil.generatePassword(password);
-
 
     return new UsersEntity(
       crypto.randomUUID(),
       username,
-      hashedPassword,
+      password,
       fullname,
       avatar,
       now,

@@ -9,12 +9,16 @@ import { EApiPath, VERSION_1 } from 'src/objects/enum/EApiPath.enum';
 import { Public } from 'src/decorator/public.decorator';
 import { User } from 'src/decorator/user.decorator';
 import { CreateUserDto } from '../application/dtos/commands/create-user.dto';
+import { CreateUserUseCase } from '../application/use-cases/create-user.usecase';
 
 @ApiTags('Users')
 @Controller({ path: EApiPath.USER, version: VERSION_1 })
 export class UsersController {
 
-  constructor(readonly usersService: UsersService) { }
+  constructor(
+    readonly usersService: UsersService,
+    readonly createUserUseCase: CreateUserUseCase
+  ) { }
 
   @Public()
   @Post("/create")
@@ -22,15 +26,18 @@ export class UsersController {
   @ApiOperation({ summary: 'Done' })
   @ApiCreatedResponse({ description: 'Create a new user' })
   @ApiQuery({ name: 'lang', required: false, example: 'vi', })
-  async creatUser(@I18n() i18n: I18nContext, @Body() usersCreateDto: CreateUserDto): Promise<ResponseApi> {
-    try {
-      const data: ResponseDto = await this.usersService.create(usersCreateDto);
+  async creatUser(@I18n() i18n: I18nContext, @Body() dto: CreateUserDto): Promise<ResponseApi> {
+      // const data: ResponseDto = await this.usersService.create(usersCreateDto);
+      const rs = await this.createUserUseCase.execute({
+        username: dto.username, 
+        password: dto.password, 
+        fullname: dto.fullname,
+        avatar: dto.avatar,
+        createdBy: 'SYSTEM'
+      });
 
-      return ResponseApi.success(data, i18n.t('root.create_success'), HttpStatus.ACCEPTED);
+      return ResponseApi.success(rs, i18n.t('root.create_success'), HttpStatus.ACCEPTED);
 
-    } catch (error) {
-      return ResponseApi.error("", i18n.t('root.create_fail'));
-    }
   }
 
   @Get("/get-all")
