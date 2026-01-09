@@ -15,7 +15,7 @@ export class LoginUseCase {
 
     const existUser = await this.userRepo.findByUsername(cmd.username);
 
-    if (!existUser) throw new UnauthorizedException('Invalid credential');
+    if (!existUser) throw new UnauthorizedException('Invalid credentials');
     const passwordVo = PasswordVO.fromHashed(existUser?.password ?? '');
 
     const isValid = await passwordVo.verify(cmd.password!, this.passwordHasher);
