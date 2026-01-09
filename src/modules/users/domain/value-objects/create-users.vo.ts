@@ -6,6 +6,4 @@ constructor(
     public fullname: string,
     public avatar: string,
   ) {}
-
-
 }

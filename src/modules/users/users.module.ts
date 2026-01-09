@@ -2,9 +2,22 @@ import { Module } from '@nestjs/common';
 import { UsersController } from './presentation/users.controller';
 import { UsersService } from './users.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { PasswordHasher } from '../shared/infrastructure/bcrypt.password.hasher';
+import { CreateUserUseCase } from './application/use-cases/create-user.usecase';
+import { UserPrismaRepository } from './infrastructure/user.prisma.repository';
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService, PrismaService]
+  providers: [
+    UsersService,
+    PrismaService,
+    { provide: 'IPasswordHasher', useClass: PasswordHasher },
+    { provide: 'IUserRepository', useClass: UserPrismaRepository },
+    {
+      provide: CreateUserUseCase,
+      useFactory: (repo, hasher) => new CreateUserUseCase(repo, hasher),
+      inject: ['IUserRepository', 'IPasswordHasher',],
+    },
+  ],
 })
-export class UsersModule {}
+export class UsersModule { }

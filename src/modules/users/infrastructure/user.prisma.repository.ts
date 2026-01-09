@@ -28,7 +28,7 @@ export class UserPrismaRepository implements IUserRepository {
   async save(user: UsersEntity): Promise<void> {
     await this.prisma.users.create({ data: {
       id: user.id,
-      username: user.fullname ?? '',
+      username: user.username,
       password: user.password ?? '',
       fullname: user.fullname,
       avatar: user.avatar,
