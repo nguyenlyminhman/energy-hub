@@ -14,8 +14,12 @@ export class PasswordVO {
     return new PasswordVO(hash);
   }
 
-  async verify(plainPassword: string, hasher: IPasswordHasher): Promise<boolean> {
-    return hasher.verify(plainPassword, this.password);
+  async verify(plain: string, passwordHasher: IPasswordHasher): Promise<boolean> {
+    return passwordHasher.verify(plain, this.password);
+  }
+
+  static fromHashed(hashed: string): PasswordVO {
+    return new PasswordVO(hashed);
   }
 
   get hashedPassword(): string {
