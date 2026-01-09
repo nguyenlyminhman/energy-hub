@@ -19,7 +19,7 @@ export class UserPrismaRepository implements IUserRepository {
   async findByUsername(username: string): Promise<UsersEntity | null> {
     const rs = await this.prisma.users.findFirst({ where: { username } });
     if (!rs) return null;
-    return new UsersEntity(rs.id, rs.username, null, rs.fullname, rs.avatar, rs.created_at, rs.created_by, null, null);
+    return new UsersEntity(rs.id, rs.username, rs.password, rs.fullname, rs.avatar, rs.created_at, rs.created_by, null, null);
   }
 
   async findAll(pagination: PaginationDto): Promise<Object | null> {

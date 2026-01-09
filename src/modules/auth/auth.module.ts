@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
+import { AuthController } from './presentation/auth.controller';
 import { UsersService } from '../users/users.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { JwtModule, JwtService } from '@nestjs/jwt';
@@ -9,29 +8,44 @@ import { ServerConfigService } from '../shared/server-config.service';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
 import { RolesGuard } from './roles.guard';
+import { PasswordHasher } from '../shared/infrastructure/bcrypt.password.hasher';
+import { UserPrismaRepository } from '../users/infrastructure/user.prisma.repository';
+import { LoginUseCase } from './application/use-cases/login.usecase';
 
 
 @Module({
   imports: [
     SharedModule,
     JwtModule.registerAsync({
+      global: true,
       imports: [SharedModule],
       inject: [ServerConfigService],
-      useFactory: (configService: ServerConfigService) => ({
-        secret: configService.authConfig.jwtSecret || 'your_jwt_secret_key',
-        global: true,
-        signOptions: { expiresIn: configService.authConfig.jwtExpirationTime || '8h' },
-      }),
+      useFactory: (configService: ServerConfigService) => {
+        const { jwtSecret, jwtExpirationTime } = configService.authConfig;
 
+        if (!jwtSecret) throw new Error('JWT_SECRET is missing');
+
+        return {
+          secret: jwtSecret,
+          signOptions: {
+            expiresIn: jwtExpirationTime ?? 86400000000,
+          },
+        };
+      },
     }),
   ],
 
   controllers: [AuthController],
   providers: [
-    AuthService,
     PrismaService,
     UsersService,
-    ServerConfigService,
+    { provide: 'IPasswordHasher', useClass: PasswordHasher },
+    { provide: 'IUserRepository', useClass: UserPrismaRepository },
+    {
+      provide: LoginUseCase,
+      useFactory: (repo, hasher, jwt) => new LoginUseCase(repo, hasher, jwt),
+      inject: ['IUserRepository', 'IPasswordHasher', JwtService],
+    },
     // {
     //   provide: APP_GUARD,
     //   useClass: AuthGuard,
