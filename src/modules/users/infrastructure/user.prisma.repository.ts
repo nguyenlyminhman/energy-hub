@@ -3,6 +3,7 @@ import { IUserRepository } from "../domain/repositories/user.repository";
 import PaginationDto from "src/common/dto/pagination.dto";
 import { UsersEntity } from "../domain/entities/users.entity";
 import { PrismaService } from "src/modules/prisma/prisma.service";
+import { AppUtil } from "src/utils/app.util";
 
 @Injectable()
 export class UserPrismaRepository implements IUserRepository {
@@ -21,19 +22,26 @@ export class UserPrismaRepository implements IUserRepository {
     return new UsersEntity(rs.id, rs.username, null, rs.fullname, rs.avatar, rs.created_at, rs.created_by, null, null);
   }
 
-  findAll(pagination: PaginationDto): Promise<Object | null> {
-    throw new Error("Method not implemented.");
+  async findAll(pagination: PaginationDto): Promise<Object | null> {
+    const skipTake = AppUtil.getSkipTake(pagination);
+
+    const totalUser = await this.prisma.users.count();
+    const rs: any[] = await this.prisma.users.findMany({ ...skipTake, omit: { password: true } });
+
+    return { data: rs, total: totalUser }
   }
 
   async save(user: UsersEntity): Promise<void> {
-    await this.prisma.users.create({ data: {
-      id: user.id,
-      username: user.username,
-      password: user.password ?? '',
-      fullname: user.fullname,
-      avatar: user.avatar,
-      created_at: user.createdAt,
-      created_by: user.createdBy,
-    }})
+    await this.prisma.users.create({
+      data: {
+        id: user.id,
+        username: user.username,
+        password: user.password ?? '',
+        fullname: user.fullname,
+        avatar: user.avatar,
+        created_at: user.createdAt,
+        created_by: user.createdBy,
+      }
+    })
   }
 }
