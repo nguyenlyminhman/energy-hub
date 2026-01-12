@@ -6,11 +6,11 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
 import { SharedModule } from '../shared/shared.module';
 import { ServerConfigService } from '../shared/server-config.service';
 import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from './auth.guard';
-import { RolesGuard } from './roles.guard';
 import { PasswordHasher } from '../shared/infrastructure/bcrypt.password.hasher';
 import { UserPrismaRepository } from '../users/infrastructure/user.prisma.repository';
 import { LoginUseCase } from './application/use-cases/login.usecase';
+import { AuthGuard } from './guard/auth.guard';
+import { RolesGuard } from './guard/roles.guard';
 
 
 @Module({
