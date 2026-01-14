@@ -3,14 +3,14 @@ import { CreateMeterRecordUseCase } from '../application/use-cases/create-meter-
 import { CreateReadingDto } from '../application/dtos/commands/create-reading.dto';
 import { CreateMeterDto } from '../application/dtos/commands/create-meter.dto';
 import { CreateMeterUseCase } from '../application/use-cases/create-meter.usecase';
-import { EApiPath, VERSION_1 } from 'src/objects/enum/EApiPath.enum';
-import { User } from 'src/decorator/user.decorator';
+import { EApiPath, VERSION_1 } from '@/objects/enum/EApiPath.enum';
+import { User } from '@/decorator/user.decorator';
 import { CreateMeterResponse } from '../application/dtos/responses/create-meter.response';
-import { ResponseApi } from 'src/common/response.helper';
+import { ResponseApi } from '@/common/response.helper';
 import { ApiQuery } from '@nestjs/swagger';
 import { I18n, I18nContext } from 'nestjs-i18n';
 import { GetAllMeterUseCase } from '../application/use-cases/get-all-meter.usecase';
-import PaginationDto from 'src/common/dto/pagination.dto';
+import PaginationDto from '@/common/dto/pagination.dto';
 
 @Controller({ path: EApiPath.METER, version: VERSION_1 })
 export class MeterController {
