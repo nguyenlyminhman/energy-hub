@@ -5,7 +5,7 @@ import { AppUtil } from 'src/utils/app.util';
 import { ResponseDto } from 'src/common/payload.data';
 import PaginationDto from 'src/common/dto/pagination.dto';
 import MetadataDto from 'src/common/dto/metadata.dto';
-import { users } from 'prisma/generated/prisma/client';
+import { users } from '@prisma/client'; 
 
 @Injectable()
 export class UsersService {

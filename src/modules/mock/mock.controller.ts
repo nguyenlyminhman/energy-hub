@@ -1,15 +1,15 @@
 import { Body, Controller, HttpCode, HttpStatus, Post, Request, Version } from '@nestjs/common';
 import { MockService } from './mock.service';
 import { ResponseApi } from './../../common/response.helper';
-import { User } from 'src/decorator/user.decorator';
+import { User } from '@/decorator/user.decorator';
 import { I18n, I18nContext } from 'nestjs-i18n';
 
 import { ApiProperty, ApiQuery } from '@nestjs/swagger';
 import { MockDto } from './dto/mock.dto';
-import MetadataDto from 'src/common/dto/metadata.dto';
-import { ResponseDto } from 'src/common/payload.data';
-import { EApiPath, VERSION_1 } from 'src/objects/enum/EApiPath.enum';
-import { Public } from 'src/decorator/public.decorator';
+import MetadataDto from '@/common/dto/metadata.dto';
+import { ResponseDto } from '@/common/payload.data';
+import { EApiPath, VERSION_1 } from '@/objects/enum/EApiPath.enum';
+import { Public } from '@/decorator/public.decorator';
 
 @Controller({ path: EApiPath.MOCK, version: VERSION_1 })
 export class MockController {
