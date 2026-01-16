@@ -22,9 +22,9 @@ describe('UserPrismaRepository (integration)', () => {
     await prisma.$connect();
   });
 
-  afterEach(async () => {
-    await prisma.users.deleteMany();
-  });
+  // afterEach(async () => {
+  //   await prisma.users.deleteMany();
+  // });
 
   afterAll(async () => {
     await prisma.$disconnect();
