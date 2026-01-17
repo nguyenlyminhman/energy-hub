@@ -4,12 +4,15 @@ import { compilerOptions } from './tsconfig.json';
 export default {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testRegex: '.*\\.spec\\.ts$',
-  testPathIgnorePatterns: [
-    '/node_modules/',
-    '/dist/',
-    '\\.int\\.spec\\.ts$',
+
+  roots: ['<rootDir>/src'],
+
+  testRegex: '.*\\.int\\.spec\\.ts$',
+
+  setupFilesAfterEnv: [
+    '<rootDir>/src/test/setup/jest-int.setup.ts',
   ],
+
   moduleNameMapper: pathsToModuleNameMapper(
     compilerOptions.paths,
     { prefix: '<rootDir>/' },

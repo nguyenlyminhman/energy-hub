@@ -22,7 +22,7 @@ import { MeteringModule } from './modules/meter/meter.module';
 
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: '.env',
+      envFilePath: [process.env.NODE_ENV === 'test' ? '.env.test' : '.env'],
       // load: [() => ({
       //   defaultLang: 'vi',
       // })],

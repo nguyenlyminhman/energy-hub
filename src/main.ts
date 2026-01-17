@@ -7,7 +7,7 @@ import { join } from 'path';
 import helmet from 'helmet';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerConfig } from './config/swagger';
-import * as morgan from 'morgan';
+import morgan from 'morgan';
 import { LoggingInterceptor } from './interceptor/logging.interceptor';
 import { GlobalExceptionFilter } from './filter/global.exception.filter';
 
