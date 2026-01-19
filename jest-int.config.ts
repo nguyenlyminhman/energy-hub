@@ -10,7 +10,7 @@ export default {
   testRegex: '.*\\.int\\.spec\\.ts$',
 
   setupFilesAfterEnv: [
-    '<rootDir>/src/test/setup/jest-int.setup.ts',
+    '<rootDir>/src/config/jest-int.setup.ts',
   ],
 
   moduleNameMapper: pathsToModuleNameMapper(
