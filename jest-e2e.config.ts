@@ -10,7 +10,7 @@ const config: Config = {
   testRegex: '.e2e-spec.ts$',
 
   setupFilesAfterEnv: [
-    '<rootDir>/src/test/setup/jest-e2e.setup.ts',
+    '<rootDir>/src/config/jest-e2e.setup.ts',
   ],
 
   moduleNameMapper: pathsToModuleNameMapper(
